@@ -181,7 +181,6 @@ zoom_chat_ext_name_abbr <- function(chr) {
 #' @param chr A character vector
 #'
 #' @return character vector
-#' @export
 zoom_chat_ext_time <- function(chr) {
 
   reg_time <- "\\d{2}:\\d{2}:\\d{2}"
