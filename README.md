@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ZoomAnalytics
+# readzoom
 
 <!-- badges: start -->
 
@@ -9,7 +9,7 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-This package contains function to parse & analyze program Zoom [chat
+This package contains function to parse program Zoom [chat
 file](https://support.zoom.us/hc/en-us/articles/115004792763-Saving-in-meeting-chat)
 and participant report file.
 
@@ -20,7 +20,7 @@ You can install the development version from
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("Lightbridge-KS/ZoomAnalytics")
+remotes::install_github("Lightbridge-KS/readzoom")
 ```
 
 ## Example
@@ -29,7 +29,7 @@ To parse Zoom chat report from `.txt` file to a tibble, just execute the
 followings:
 
 ``` r
-library(ZoomAnalytics)
+library(readzoom)
 
 read_zoom_chat("path/to/zoom_chat.txt")
 ```
