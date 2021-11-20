@@ -1,13 +1,13 @@
 Package: readzoom
-Title: Zoom Analytics
+Title: Read Zoom
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Kittipos",
            family = "Sirivongrungson",
            role = c("aut", "cre"),
            email = "ki11ip0.s.a.s@gmail.com")
-Description: This package contains a collection of functions for data
-    wrangling and analysis of program Zoom chat file & participant
+Description: This package contains a collection of functions for parsing,
+    data wrangling and analysis of program Zoom chat file & participant
     recording.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -17,10 +17,13 @@ Imports:
     dplyr,
     lubridate,
     magrittr,
+    methods,
     purrr,
+    readr,
     readtext,
     stringr,
-    tibble
+    tibble,
+    tidyselect
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
