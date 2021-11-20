@@ -17,8 +17,8 @@ test_that("`system.file path works`",{
 
 test_that("read_zoom_chat is working",{
   # Full & Abbreviated
-  chat_df_full <- readzoom::read_zoom_chat(system.file("testdata","Zoom-chat-ex.txt",package="readzoom"))
-  chat_df_abbr <- readzoom::read_zoom_chat(system.file("testdata","Zoom-chat-ex-abbr.txt",package="readzoom"))
+  chat_df_full <- readzoom::read_zoom_chat(path_testdata("chat/Zoom-chat-ex.txt"))
+  chat_df_abbr <- readzoom::read_zoom_chat(path_testdata("chat/Zoom-chat-ex-abbr.txt"))
    expect_s3_class(chat_df_full, "tbl_df")
    expect_s3_class(chat_df_abbr, "tbl_df")
 
