@@ -57,7 +57,7 @@ read_participants <- function(file) {
     # Date-Time Formatting: `mm/dd/yy hh:mm:ss AM/PM`
     dplyr::mutate(
       dplyr::across(
-        tidyselect::contains("Time"), ~lubridate::parse_date_time(.x, "%m/%d/%Y %H:%M:%S %p")
+        tidyselect::contains("Time"), parse_pp_datetime
       )) %>%
     # Extract Original and Current Name
     dplyr::mutate(
@@ -66,10 +66,10 @@ read_participants <- function(file) {
       .after = `Name (Original Name)`
     )
   # Set Meta Data as Attribute
+  #attr(df_cleaned, "meeting_overview") <- meta_df
   df_cleaned <- create_zoom_participants(df_cleaned, meta_df)
   df_cleaned
 }
-
 
 
 # Helper: Read Meeting Overview -------------------------------------------
@@ -106,6 +106,51 @@ read_meeting_overview <- function(file) {
     dplyr::mutate(Meeting_ID = as.character(Meeting_ID))
 
 
+
+}
+
+
+# Helper: Parse Date-Time Formatting --------------------------------------
+
+
+#' Parse Date-Time formatting Using Lubridate Function
+#'
+#' @param chr Character vector of date-time
+#'
+#' @return A POSIXct
+#'
+parse_pp_datetime <- function(chr){
+
+  ## Whether "AM" or "PM" is at the end or not (Test the first one)
+  has_am_pm <- stringr::str_detect(chr[[1]], "(A|P)M$")
+
+  dt <- if (has_am_pm) {
+    ## If has "AM" or "PM", assume `mm/dd/yyyy hh:mm:ss AM/PM`
+    lubridate::mdy_hms(chr, quiet = T)
+  } else {
+    ## If not, assume `dd/mm/yyyy hh:mm:ss`
+    lubridate::dmy_hms(chr, quiet = T)
+  }
+  # Success -> return
+  if( !is.na(dt[[1]])) return(dt)
+
+  ## If all fail
+  parse_funs <- list(
+    "a" = lubridate::ymd_hms,
+    "b" = lubridate::ydm_hms
+  )
+  ### Find the first function that Not return `NA` (Test the first one)
+  usable_fun_lgl <-
+    purrr::map_lgl(names(parse_funs),
+                   ~!is.na(parse_funs[[.x]]( chr[[1]], quiet = T)))
+
+  ### Not Found Any Funs: Error
+  if(all(!usable_fun_lgl)) stop("All lubridate functions fail to parse date-time.")
+
+  # If found, Execute !
+  first_usable_fun <- parse_funs[[ which(usable_fun_lgl)[1] ]]
+
+  first_usable_fun(chr)
 
 }
 
