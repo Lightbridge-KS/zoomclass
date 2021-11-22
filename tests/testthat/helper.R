@@ -13,8 +13,10 @@ path_testdata <- function(..., package = "readzoom") {
 
 paths.testdata <- list(
   pp_cal = path_testdata("participants/original", "participants_213ClinCa.csv"),
-  pp_mm2 = path_testdata("participants/original", "participants_MM-2021-11-19.csv")
+  pp_mm2 = path_testdata("participants/original", "participants_MM-2021-11-19.csv"),
+  pp_metsd = path_testdata("participants/original", "participants_metabolic-19-11-64.csv")
 )
+
 
 
 # Read Zoom Participants --------------------------------------------------
@@ -22,6 +24,8 @@ paths.testdata <- list(
 
 pp_cal_cleaned <- read_participants(paths.testdata$pp_cal)
 pp_mm2_cleaned <- read_participants(paths.testdata$pp_mm2)
+
+
 
 
 # Class Session -----------------------------------------------------------

@@ -51,6 +51,28 @@ test_that("read_participants() values OK",{
 })
 
 
+# Parse date-time ---------------------------------------------------------
+
+
+test_that("parse_pp_datetime() works",{
+
+  # Format 1: `mm/dd/yyyy hh:mm:ss AM/PM`
+  t1 <- "10/06/2021 09:20:31 AM"
+  expect_equal(parse_pp_datetime(t1), mdy_hms(t1))
+
+  # Format 2: `dd/mm/yyyy hh:mm:ss`
+  t2 <- "19/11/2021 10:34:26"
+  expect_equal(parse_pp_datetime(t2), dmy_hms(t2))
+
+  # Other Format
+  ## `yyyy/mm/dd hh:mm:ss`
+  t3 <- "2021/10/20 09:20:31 AM"
+  expect_equal(parse_pp_datetime(t3), ymd_hms(t3))
+  ## `yyyy/dd/mm hh:mm:ss`
+  t4 <- "2021/20/10 09:20:31"
+  expect_equal(parse_pp_datetime(t4), ydm_hms(t4))
+
+})
 # Extract Current & Original Name -----------------------------------------
 
 
