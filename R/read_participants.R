@@ -13,7 +13,16 @@
 #'
 #' @param file A path to a Zoom's participant file
 #'
-#' @return An tibble with class "zoom_participants" added
+#' @return A data frame (tibble) with class "zoom_participants". It has the following new columns:
+#' * \strong{"Name (Original Name)"}: the same column "Name (Original Name)" as input file
+#' * \strong{"Name"}: Current name displayed in Zoom meeting of the participants.
+#' * \strong{"Name_Original"}: Original name of the participants.
+#'   It was extracted from the contents within the last balanced parentheses of "Name (Original Name)".
+#' * \strong{"Email"}: from original "User Email" column
+#' * \strong{"Join_Time"}: from original "Join Time" column
+#' * \strong{"Leave_Time"}: from original "Leave Time" column
+#' * \strong{"Duration_Minutes"}: from original "Duration (Minutes)" column
+#' * \strong{"Rec_Consent"}: from original "Recording Consent" column
 #' @export
 #'
 #' @examples
