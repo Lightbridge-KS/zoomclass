@@ -2,6 +2,8 @@
 
 export("%>%")
 export(class_overview)
+export(class_session)
+export(class_students)
 export(meeting_overview)
 export(read_participants)
 export(read_zoom_chat)
