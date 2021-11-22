@@ -24,6 +24,26 @@ pp_cal_cleaned <- read_participants(paths.testdata$pp_cal)
 pp_mm2_cleaned <- read_participants(paths.testdata$pp_mm2)
 
 
+# Class Session -----------------------------------------------------------
+
+
+pp_cal_session <- class_session(pp_cal_cleaned,
+                                class_start = "10:00:00", class_end = "12:00:00")
+pp_mm2_session <- class_session(pp_mm2_cleaned,
+                                class_start = "10:00:00", class_end = "12:00:00")
+
+
+# Class Student -----------------------------------------------------------
+
+pp_cal_students <- class_students(pp_cal_cleaned,
+  class_start = "10:00:00", class_end = "12:00:00",
+  late_cutoff = "10:15:00"
+)
+
+pp_mm2_students <- class_students(pp_mm2_cleaned,
+               class_start = "10:00:00", class_end = "12:00:00",
+               late_cutoff = "10:15:00")
+
 
 # Class Time --------------------------------------------------------------
 
