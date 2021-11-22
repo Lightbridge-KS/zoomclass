@@ -10,7 +10,18 @@ read_participants(file)
 \item{file}{A path to a Zoom's participant file}
 }
 \value{
-An tibble with class "zoom_participants" added
+A data frame (tibble) with class "zoom_participants". It has the following new columns:
+\itemize{
+\item \strong{"Name (Original Name)"}: the same column "Name (Original Name)" as input file
+\item \strong{"Name"}: Current name displayed in Zoom meeting of the participants.
+\item \strong{"Name_Original"}: Original name of the participants.
+It was extracted from the contents within the last balanced parentheses of "Name (Original Name)".
+\item \strong{"Email"}: from original "User Email" column
+\item \strong{"Join_Time"}: from original "Join Time" column
+\item \strong{"Leave_Time"}: from original "Leave Time" column
+\item \strong{"Duration_Minutes"}: from original "Duration (Minutes)" column
+\item \strong{"Rec_Consent"}: from original "Recording Consent" column
+}
 }
 \description{
 This function read Zoom's participant file from CSV to a tibble with sensible formatting and cleaner
