@@ -23,6 +23,7 @@
 #'
 #' @param data A data frame (tibble) with class `zoom_participants`
 #' @param id_regex (Character) regular expression used to extract student's ID from `Name (Original Name)` to `ID` column
+#' @param collapse (Character) How to collapse "Name (Original Name)" and "Email" if found multiple different names or Email of each student's ID.
 #' @param class_start (Character) The time of class started, input as "hh:mm:ss".
 #' If `NULL` (default) and `zoom_participants` has `meeting_overview` attribute, "Start_Time" of the attribute will be used.
 #' @param class_end (Character) The time of class ended, input as "hh:mm:ss".
@@ -37,7 +38,7 @@
 #' @param round_digits (Integer) significant digits to round the numeric columns. If `NULL` (default), no round.
 #'
 #' @return A data frame (tibble) with class `zoom_class`. It has the following columns:
-#' * \strong{"ID"}: the student's ID as extracted from `Name (Original Name)` by `id_regex`.
+#' * \strong{"ID"}: the student's ID as extracted from `Name (Original Name)` by `id_regex`. Unmatched ID will leave as `NA` in the bottom rows.
 #' * \strong{"Name"}: Name combinations from `Name (Original Name)` of each IDs
 #' * \strong{"Email"}: Email combinations from `Email` of each IDs
 #' * \strong{"Session_Count"}: Show counts of how many session that each students joined or leaved Zoom class.
@@ -49,7 +50,9 @@
 #' * \strong{"During_Class"}: Time spent during class (between `class_start` and `class_end`) of each student.
 #' * \strong{"After_Class"}: Time spent after `class_end` of each student.
 #' * \strong{"Total_Time"}: "Before_Class" + "During_Class" + "After_Class"
-#' * \strong{"Duration_Minutes"}: Sum of "Duration (Minutes)" for each students
+#' * \strong{"Duration_Minutes"}: Sum of "Duration (Minutes)" for each students.
+#'  **Notice:** `Total_Time` is likely to be less than original `Duration_Minutes` because the latter round the decimal down.
+#'  This difference will be more pronounced when summed with multiple sessions.
 #' * \strong{"Multi_Device"}: `TRUE` if students joined Zoom with multiple devices in any session.
 #' * \strong{"Late_Time"} (Optional): If provide `late_cutoff` as "hh:mm:ss", "Late_Time" period is computed by `Join_Time` - `late_cutoff`.
 #'
@@ -60,6 +63,7 @@
 #' @examples
 class_studentsID <- function(data,
                              id_regex = ".*",
+                             collapse = "; ",
                              class_start = NULL,
                              class_end = NULL,
                              late_cutoff = NULL,
@@ -86,7 +90,7 @@ class_studentsID <- function(data,
   ## Process: Session & Multi Device
   df_processed <- process_class_session_device(df_timed) %>%
     ### - Process: Class Student ID Summary - ###
-    process_class_studentsID(id_regex = id_regex, late_cutoff = late_cutoff)
+    process_class_studentsID(id_regex = id_regex, late_cutoff = late_cutoff, collapse = collapse)
 
   ## Convert Period object to "second", "minute", "hour"
   if(period_to != "period"){
