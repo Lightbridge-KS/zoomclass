@@ -43,10 +43,10 @@ process_class_studentsID <- function(df_processed,
     dplyr::group_by(ID) %>%
     dplyr::summarise(
       # Combine Names (If multiple per ID)
-      Name = paste_collapse_na.rm(`Name (Original Name)`,
-                                  collapse = "; "),
-      Email = paste_collapse_na.rm(Email,
-                                   collapse = "; "),
+      Name = paste_unique_collapse_na.rm(`Name (Original Name)`,
+                                         collapse = "; "),
+      Email = paste_unique_collapse_na.rm(Email,
+                                          collapse = "; "),
       # Count Sessions
       Session_Count = max(Session),
       # Class Start & End (unique to prevent vector recycling)
@@ -84,22 +84,22 @@ process_class_studentsID <- function(df_processed,
     )
 }
 
+# Helper: Paste Collapse with Unique value & NA removed --------------------------------------
 
-# Helper: Paste Collapse with NA removed --------------------------------------
 
-
-#' Paste Collapse with NA removed
+#' Paste Collapse with with Unique value & NA removed
 #'
 #' @param x A vector to paste and collapse
 #' @param collapse an optional character string to separate the results.
 #'
 #' @return A character vector
 #'
-paste_collapse_na.rm <- function(x, collapse = NULL) {
+paste_unique_collapse_na.rm <- function(x, collapse = NULL) {
 
   if(all(is.na(x))) return(NA_character_)
 
   x_na.rm <- stats::na.omit(x)
-  paste(x_na.rm, collapse = collapse)
+  x_unique <- unique(x_na.rm)
+  paste(x_unique, collapse = collapse)
 
 }
