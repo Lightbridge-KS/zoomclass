@@ -47,7 +47,9 @@
 #' * \strong{"During_Class"}: Time spent during class (between `class_start` and `class_end`) of each student.
 #' * \strong{"After_Class"}: Time spent after `class_end` of each student.
 #' * \strong{"Total_Time"}: "Before_Class" + "During_Class" + "After_Class"
-#' * \strong{"Duration_Minutes"}: Sum of "Duration (Minutes)" for each students
+#' * \strong{"Duration_Minutes"}: Sum of "Duration (Minutes)" for each students.
+#'  **Notice:** `Total_Time` is likely to be less than original `Duration_Minutes` because the latter round the decimal down.
+#'  This difference will be more pronounced when summed with multiple sessions.
 #' * \strong{"Multi_Device"}: `TRUE` if students joined Zoom with multiple devices in any session.
 #' * \strong{"Late_Time"} (Optional): If provide `late_cutoff` as "hh:mm:ss", "Late_Time" period is computed by `Join_Time` - `late_cutoff`.
 #'
