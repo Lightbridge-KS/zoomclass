@@ -51,7 +51,7 @@
 #' * \strong{"Multi_Device"}: `TRUE` if students joined Zoom with multiple devices in any session.
 #' * \strong{"Late_Time"} (Optional): If provide `late_cutoff` as "hh:mm:ss", "Late_Time" period is computed by `Join_Time` - `late_cutoff`.
 #'
-#' @seealso Checkout [class_session()] for summary of each session.
+#' @seealso Checkout [class_studentsID()] for summary by extracted student's ID, and [class_session()] for summary of each session.
 #'
 #' @export
 #'
