@@ -52,7 +52,9 @@ It was extracted from the contents within the last balanced parentheses of "Name
 \item \strong{"During_Class"}: Time spent during class (between \code{class_start} and \code{class_end}) of each student.
 \item \strong{"After_Class"}: Time spent after \code{class_end} of each student.
 \item \strong{"Total_Time"}: "Before_Class" + "During_Class" + "After_Class"
-\item \strong{"Duration_Minutes"}: Sum of "Duration (Minutes)" for each students
+\item \strong{"Duration_Minutes"}: Sum of "Duration (Minutes)" for each students.
+\strong{Notice:} \code{Total_Time} is likely to be less than original \code{Duration_Minutes} because the latter round the decimal down.
+This difference will be more pronounced when summed with multiple sessions.
 \item \strong{"Multi_Device"}: \code{TRUE} if students joined Zoom with multiple devices in any session.
 \item \strong{"Late_Time"} (Optional): If provide \code{late_cutoff} as "hh:mm:ss", "Late_Time" period is computed by \code{Join_Time} - \code{late_cutoff}.
 }

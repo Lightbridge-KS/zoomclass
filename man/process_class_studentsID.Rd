@@ -4,12 +4,19 @@
 \alias{process_class_studentsID}
 \title{Process Class Student ID}
 \usage{
-process_class_studentsID(df_processed, id_regex = ".*", late_cutoff = NULL)
+process_class_studentsID(
+  df_processed,
+  id_regex = ".*",
+  collapse = "; ",
+  late_cutoff = NULL
+)
 }
 \arguments{
 \item{df_processed}{time-processed tibble}
 
 \item{id_regex}{(Character) regular expression used to extract student's ID from \verb{Name (Original Name)} to \code{ID} column}
+
+\item{collapse}{How to collapse "Name (Original Name)" and "Email" column}
 
 \item{late_cutoff}{(Character) Cutoff time (input as "hh:mm:ss"), participants join after this time will be considered late.}
 }

@@ -6,9 +6,7 @@
 \alias{readzoom-package}
 \title{readzoom: Read Zoom}
 \description{
-This package contains a collection of functions for parsing,
-    data wrangling and analysis of program Zoom chat file & participant
-    recording.
+This package contains a collection of functions for parsing, data wrangling and analysis of program Zoom chat file & participant recording.
 }
 \author{
 \strong{Maintainer}: Kittipos Sirivongrungson \email{ki11ip0.s.a.s@gmail.com}

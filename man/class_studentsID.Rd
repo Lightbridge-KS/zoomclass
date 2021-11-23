@@ -7,6 +7,7 @@
 class_studentsID(
   data,
   id_regex = ".*",
+  collapse = "; ",
   class_start = NULL,
   class_end = NULL,
   late_cutoff = NULL,
@@ -18,6 +19,8 @@ class_studentsID(
 \item{data}{A data frame (tibble) with class \code{zoom_participants}}
 
 \item{id_regex}{(Character) regular expression used to extract student's ID from \verb{Name (Original Name)} to \code{ID} column}
+
+\item{collapse}{(Character) How to collapse "Name (Original Name)" and "Email" if found multiple different names or Email of each student's ID.}
 
 \item{class_start}{(Character) The time of class started, input as "hh:mm:ss".
 If \code{NULL} (default) and \code{zoom_participants} has \code{meeting_overview} attribute, "Start_Time" of the attribute will be used.}
@@ -41,7 +44,7 @@ Must be one of:
 \value{
 A data frame (tibble) with class \code{zoom_class}. It has the following columns:
 \itemize{
-\item \strong{"ID"}: the student's ID as extracted from \verb{Name (Original Name)} by \code{id_regex}.
+\item \strong{"ID"}: the student's ID as extracted from \verb{Name (Original Name)} by \code{id_regex}. Unmatched ID will leave as \code{NA} in the bottom rows.
 \item \strong{"Name"}: Name combinations from \verb{Name (Original Name)} of each IDs
 \item \strong{"Email"}: Email combinations from \code{Email} of each IDs
 \item \strong{"Session_Count"}: Show counts of how many session that each students joined or leaved Zoom class.
@@ -53,7 +56,9 @@ A data frame (tibble) with class \code{zoom_class}. It has the following columns
 \item \strong{"During_Class"}: Time spent during class (between \code{class_start} and \code{class_end}) of each student.
 \item \strong{"After_Class"}: Time spent after \code{class_end} of each student.
 \item \strong{"Total_Time"}: "Before_Class" + "During_Class" + "After_Class"
-\item \strong{"Duration_Minutes"}: Sum of "Duration (Minutes)" for each students
+\item \strong{"Duration_Minutes"}: Sum of "Duration (Minutes)" for each students.
+\strong{Notice:} \code{Total_Time} is likely to be less than original \code{Duration_Minutes} because the latter round the decimal down.
+This difference will be more pronounced when summed with multiple sessions.
 \item \strong{"Multi_Device"}: \code{TRUE} if students joined Zoom with multiple devices in any session.
 \item \strong{"Late_Time"} (Optional): If provide \code{late_cutoff} as "hh:mm:ss", "Late_Time" period is computed by \code{Join_Time} - \code{late_cutoff}.
 }
