@@ -2,7 +2,7 @@
 
 # Get Path to testdata folder ---------------------------------------------
 
-path_testdata <- function(..., package = "readzoom") {
+path_testdata <- function(..., package = "zoomclass") {
 
   system.file("testdata", ... ,package = package)
 

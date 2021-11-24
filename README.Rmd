@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# readzoom
+# zoomclass
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
@@ -28,7 +28,7 @@ You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("Lightbridge-KS/readzoom")
+remotes::install_github("Lightbridge-KS/zoomclass")
 ```
 
 ## Example
@@ -36,7 +36,7 @@ remotes::install_github("Lightbridge-KS/readzoom")
 To parse Zoom chat report from `.txt` file to a tibble, just execute the followings:
 
 ```{r example, eval=FALSE}
-library(readzoom)
+library(zoomclass)
 
 read_zoom_chat("path/to/zoom_chat.txt")
 ```

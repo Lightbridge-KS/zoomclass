@@ -1,4 +1,4 @@
 library(testthat)
-library(readzoom)
+library(zoomclass)
 
-test_check("readzoom")
+test_check("zoomclass")

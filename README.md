@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# readzoom
+# zoomclass
 
 <!-- badges: start -->
 
@@ -20,7 +20,7 @@ You can install the development version from
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("Lightbridge-KS/readzoom")
+remotes::install_github("Lightbridge-KS/zoomclass")
 ```
 
 ## Example
@@ -29,7 +29,7 @@ To parse Zoom chat report from `.txt` file to a tibble, just execute the
 followings:
 
 ``` r
-library(readzoom)
+library(zoomclass)
 
 read_zoom_chat("path/to/zoom_chat.txt")
 ```

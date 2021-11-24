@@ -7,7 +7,7 @@ test_that("multiplication works", {
 
 
 test_that("`system.file path works`",{
-  path <- system.file("testdata", package="readzoom")
+  path <- system.file("testdata", package="zoomclass")
   expect_false(path == "")
 })
 
@@ -17,8 +17,8 @@ test_that("`system.file path works`",{
 
 test_that("read_zoom_chat is working",{
   # Full & Abbreviated
-  chat_df_full <- readzoom::read_zoom_chat(path_testdata("chat/Zoom-chat-ex.txt"))
-  chat_df_abbr <- readzoom::read_zoom_chat(path_testdata("chat/Zoom-chat-ex-abbr.txt"))
+  chat_df_full <- zoomclass::read_zoom_chat(path_testdata("chat/Zoom-chat-ex.txt"))
+  chat_df_abbr <- zoomclass::read_zoom_chat(path_testdata("chat/Zoom-chat-ex-abbr.txt"))
    expect_s3_class(chat_df_full, "tbl_df")
    expect_s3_class(chat_df_abbr, "tbl_df")
 

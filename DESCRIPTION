@@ -1,14 +1,13 @@
-Package: readzoom
-Title: Read Zoom
+Package: zoomclass
+Title: Zoom Class
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Kittipos",
-           family = "Sirivongrungson",
-           role = c("aut", "cre"),
-           email = "ki11ip0.s.a.s@gmail.com")
-Description: This package contains a collection of functions for parsing,
-    data wrangling and analysis of program Zoom chat file & participant
-    recording.
+    person("Kittipos", "Sirivongrungson", , "ki11ip0.s.a.s@gmail.com", role = c("aut", "cre"))
+Description: This package contains a collection of functions for analysis
+    of Zoom classroom report. This includes parsing, data wrangling and
+    analysis of program Zoom chat file & participant recording with option
+    to compute time interval before, during, and after class and also late
+    time.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -25,6 +24,3 @@ Imports:
     stringr,
     tibble,
     tidyselect
-Suggests: 
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
