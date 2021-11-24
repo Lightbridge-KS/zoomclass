@@ -19,11 +19,11 @@
 #' "Session_Count" will counts how many times each students join or leave the Zoom class.
 #'
 #' @param data A data frame (tibble) with class `zoom_participants`
-#' @param class_start (Character) The time of class started, input as "hh:mm:ss".
+#' @param class_start (Character) The time of class started, input as "hh:mm:ss" or "hh:mm".
 #' If `NULL` (default) and `zoom_participants` has `meeting_overview` attribute, "Start_Time" of the attribute will be used.
-#' @param class_end (Character) The time of class ended, input as "hh:mm:ss".
+#' @param class_end (Character) The time of class ended, input as "hh:mm:ss" or "hh:mm".
 #' If `NULL` (default) and `zoom_participants` has `meeting_overview` attribute, "End_Time" of the attribute will be used.
-#' @param late_cutoff (Character) Late time cutoff (input as "hh:mm:ss"). If provided, "Late_Time" will be included in the output columns.
+#' @param late_cutoff (Character) Late time cutoff (input as "hh:mm:ss" or "hh:mm"). If provided, "Late_Time" will be included in the output columns.
 #' @param period_to (Character) Indicate the units of "Before_Class", "During_Class", "After_Class" and "Total_Time" in the output.
 #' Must be one of:
 #' * \strong{"period"} (default): return as `lubridate::period` object

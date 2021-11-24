@@ -1,7 +1,16 @@
 
 library(lubridate)
 
+# Helper: parse_time_flex -------------------------------------------------
 
+test_that("parse_time_flex() works",{
+
+  expect_equal(parse_time_flex("12:11:10"), hours(12) + minutes(11) + seconds(10))
+  expect_equal(parse_time_flex("12:11"), hours(12) + minutes(11))
+  ## Error
+  expect_error(parse_time_flex("12"))
+
+})
 
 # Test: before class time -------------------------------------------------
 

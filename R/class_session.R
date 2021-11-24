@@ -19,9 +19,9 @@
 #' Finally, rows will be arranged as specified by `arrange_by` with grouping by `arrange_group`.
 #'
 #' @param data A data frame (tibble) with class `zoom_participants`
-#' @param class_start (Character) The time of class started, input as "hh:mm:ss".
+#' @param class_start (Character) The time of class started, input as "hh:mm:ss" or "hh:mm".
 #' If `NULL` (default) and `zoom_participants` has `meeting_overview` attribute, "Start_Time" of the attribute will be used.
-#' @param class_end (Character) The time of class ended, input as "hh:mm:ss".
+#' @param class_end (Character) The time of class ended, input as "hh:mm:ss" or "hh:mm".
 #' If `NULL` (default) and `zoom_participants` has `meeting_overview` attribute, "End_Time" of the attribute will be used.
 #' @param arrange_by (Character) How to arrange rows, must be one of:
 #' * \strong{"Join_Time"}: arrange by `Join_Time`, earliest first

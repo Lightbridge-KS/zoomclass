@@ -10,8 +10,8 @@
 #' each sessions.
 #'
 #' @param df_cleaned A "zoom_participants" object (cleaned tibble)
-#' @param class_start (Character) Time of class start (input as "hh:mm:ss"). If `NULL`, use "Start_Time" from "meeting_overview" attribute.
-#' @param class_end (Character) Time of class end (input as "hh:mm:ss"). If `NULL`, use "End_Time" from "meeting_overview" attribute.
+#' @param class_start (Character) Time of class start (input as "hh:mm:ss" or "hh:mm"). If `NULL`, use "Start_Time" from "meeting_overview" attribute.
+#' @param class_end (Character) Time of class end (input as "hh:mm:ss" or "hh:mm"). If `NULL`, use "End_Time" from "meeting_overview" attribute.
 #'
 #' @return A tibble with class "zoom_class" with the following columns added:
 #' * \strong{"Class_Start"}: POSIXct of `class_start`
@@ -43,9 +43,11 @@ process_class_time <- function(df_cleaned,
     }
   } else {
     class_start <- lubridate::date(df_cleaned[["Join_Time"]]) +
-      lubridate::hms(class_start, quiet = T)
+      parse_time_flex(class_start)
+    #lubridate::hms(class_start, quiet = T)
     class_end <- lubridate::date(df_cleaned[["Leave_Time"]]) +
-      lubridate::hms(class_end, quiet = T)
+      parse_time_flex(class_end)
+    #lubridate::hms(class_end, quiet = T)
   }
 
   df_processed <- df_cleaned %>%
@@ -70,6 +72,38 @@ process_class_time <- function(df_cleaned,
   df_processed
 
 }
+
+
+# Flexible Parse Time -----------------------------------------------------
+
+
+
+#' Flexible Parse Time
+#'
+#'
+#'
+#' @param chr Input can be "hh:mm:ss" or "hh:mm"
+#'
+#' @return A period object
+#'
+parse_time_flex <- function(chr) {
+
+  parse_funs <- list(
+    "a" = lubridate::hm,
+    "b" = lubridate::hms
+  )
+  ### Find the first function that Not return `NA` (Test the first one)
+  usable_fun_lgl <-
+    purrr::map_lgl(names(parse_funs),
+                   ~!is.na(parse_funs[[.x]]( chr[[1]], quiet = TRUE)))
+  ### Not Found Any Funs: Error
+  if(all(!usable_fun_lgl)) stop("All lubridate functions fail to parse time.")
+
+  # If found, Execute !
+  first_usable_fun <- parse_funs[[ which(usable_fun_lgl)[1] ]]
+  first_usable_fun(chr)
+}
+
 
 # Before Class Time -------------------------------------------------------
 
