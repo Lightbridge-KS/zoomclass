@@ -81,8 +81,9 @@ late_cutoff_POSIXct <- function(join_POSIXct,
   if(is.null(late_cutoff)) return(as.POSIXct(NA))
   ## In case of meeting was joined span 2 or more days
   first_date <- min(lubridate::date(join_POSIXct))
-  late_cutoff_POSIXct <- first_date + lubridate::hms(late_cutoff, quiet = T)
-  late_cutoff_POSIXct
+  out <- first_date + parse_time_flex(late_cutoff)
+  ## To POSICxt
+  as.POSIXct(out)
 
 }
 
