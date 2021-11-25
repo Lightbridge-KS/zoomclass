@@ -105,8 +105,8 @@ get_late_time <- function(join, late_cutoff) {
   has.Na <- is.na(join) | is.na(late_cutoff)
 
   out <- lubridate::as.period(numeric(length(join)))
-
-  diff <- join - late_cutoff
+  ### Must Convert to POSIXct first
+  diff <- as.POSIXct(join) - as.POSIXct(late_cutoff)
   pos_lgl <- diff > 0
   pos_lgl[is.na(pos_lgl)] <- FALSE # Replace NA with FALSE
 

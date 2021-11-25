@@ -125,6 +125,10 @@ get_before_class_time <- function(start, join, leave) {
   out <- lubridate::as.period(numeric(length(start)))
   # Check NA
   has.Na <- is.na(start) | is.na(join) | is.na(leave)
+  # Convert to POSIXct
+  start <- as.POSIXct(start)
+  leave <- as.POSIXct(leave)
+  join <- as.POSIXct(join)
   # Time Diff
   diff <-   pmin(start, leave) - join
   pos_lgl <- diff > 0
@@ -159,7 +163,11 @@ get_after_class_time <- function(end, join, leave) {
   has.Na <- is.na(end) | is.na(join) | is.na(leave)
 
   out <- lubridate::as.period(numeric(length(end)))
-
+  # Convert to POSIXct
+  end <- as.POSIXct(end)
+  join <- as.POSIXct(join)
+  leave <- as.POSIXct(leave)
+  # Diff
   diff <-  leave - pmax(end,join)
   pos_lgl <- diff > 0
   pos_lgl[is.na(pos_lgl)] <- FALSE # Replace NA with FALSE
@@ -196,6 +204,11 @@ get_during_class_time <- function(start, end, join, leave) {
   has.Na <- is.na(start) | is.na(end) | is.na(join) | is.na(leave)
 
   out <- lubridate::as.period(numeric(length(start)))
+  # Convert to POSICxt
+  start <- as.POSIXct(start)
+  end <- as.POSIXct(end)
+  join <- as.POSIXct(join)
+  leave <- as.POSIXct(leave)
   # Compute Diff
   diff <-  pmin(end, leave) - pmax(start, join)
 
@@ -209,3 +222,4 @@ get_during_class_time <- function(start, end, join, leave) {
   out
 
 }
+
