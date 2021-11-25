@@ -16,13 +16,13 @@ class_students(
 \arguments{
 \item{data}{A data frame (tibble) with class \code{zoom_participants}}
 
-\item{class_start}{(Character) The time of class started, input as "hh:mm:ss".
+\item{class_start}{(Character) The time of class started, input as "hh:mm:ss" or "hh:mm".
 If \code{NULL} (default) and \code{zoom_participants} has \code{meeting_overview} attribute, "Start_Time" of the attribute will be used.}
 
-\item{class_end}{(Character) The time of class ended, input as "hh:mm:ss".
+\item{class_end}{(Character) The time of class ended, input as "hh:mm:ss" or "hh:mm".
 If \code{NULL} (default) and \code{zoom_participants} has \code{meeting_overview} attribute, "End_Time" of the attribute will be used.}
 
-\item{late_cutoff}{(Character) Late time cutoff (input as "hh:mm:ss"). If provided, "Late_Time" will be included in the output columns.}
+\item{late_cutoff}{(Character) Late time cutoff (input as "hh:mm:ss" or "hh:mm"). If provided, "Late_Time" will be included in the output columns.}
 
 \item{period_to}{(Character) Indicate the units of "Before_Class", "During_Class", "After_Class" and "Total_Time" in the output.
 Must be one of:

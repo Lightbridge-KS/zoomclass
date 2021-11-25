@@ -9,9 +9,9 @@ process_class_time(df_cleaned, class_start = NULL, class_end = NULL)
 \arguments{
 \item{df_cleaned}{A "zoom_participants" object (cleaned tibble)}
 
-\item{class_start}{(Character) Time of class start (input as "hh:mm:ss"). If \code{NULL}, use "Start_Time" from "meeting_overview" attribute.}
+\item{class_start}{(Character) Time of class start (input as "hh:mm:ss" or "hh:mm"). If \code{NULL}, use "Start_Time" from "meeting_overview" attribute.}
 
-\item{class_end}{(Character) Time of class end (input as "hh:mm:ss"). If \code{NULL}, use "End_Time" from "meeting_overview" attribute.}
+\item{class_end}{(Character) Time of class end (input as "hh:mm:ss" or "hh:mm"). If \code{NULL}, use "End_Time" from "meeting_overview" attribute.}
 }
 \value{
 A tibble with class "zoom_class" with the following columns added:

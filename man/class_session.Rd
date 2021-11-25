@@ -17,10 +17,10 @@ class_session(
 \arguments{
 \item{data}{A data frame (tibble) with class \code{zoom_participants}}
 
-\item{class_start}{(Character) The time of class started, input as "hh:mm:ss".
+\item{class_start}{(Character) The time of class started, input as "hh:mm:ss" or "hh:mm".
 If \code{NULL} (default) and \code{zoom_participants} has \code{meeting_overview} attribute, "Start_Time" of the attribute will be used.}
 
-\item{class_end}{(Character) The time of class ended, input as "hh:mm:ss".
+\item{class_end}{(Character) The time of class ended, input as "hh:mm:ss" or "hh:mm".
 If \code{NULL} (default) and \code{zoom_participants} has \code{meeting_overview} attribute, "End_Time" of the attribute will be used.}
 
 \item{arrange_by}{(Character) How to arrange rows, must be one of:
