@@ -49,14 +49,14 @@
 #' Computed by ranking "Join_Time" in the grouping variables: "Name (Original Name)" and "Email".
 #' * \strong{"Class_Start"} (POSIXct): Compute from date of "Join_Time" with time specified by `class_start` argument.
 #' * \strong{"Class_End"} (POSIXct): Compute from date of "Leave_Time" with time specified by `class_end` argument.
-#' * \strong{"Join_Time"}: from original "Join Time" column
-#' * \strong{"Leave_Time"}: from original "Leave Time" column
+#' * \strong{"Join_Time"}: from the original "Join Time" column
+#' * \strong{"Leave_Time"}: from the original "Leave Time" column
 #' * \strong{"Before_Class"}: Time spent before `class_start` of each session.
 #' * \strong{"During_Class"}: Time spent during class (between `class_start` and `class_end`) of each session.
 #' * \strong{"After_Class"}: Time spent after `class_end` of each session.
 #' * \strong{"Total_Time"}: "Before_Class" + "During_Class" + "After_Class"
 #' * \strong{"Duration_Minutes"}: from original "Duration (Minutes)" column
-#' * \strong{"Rec_Consent"}: from original "Recording Consent" column
+#' * \strong{"Rec_Consent"}: from the original "Recording Consent" column
 #' * \strong{"Multi_Device"}: `TRUE` if any sessions of each student joined Zoom with multiple devices.
 #' It is computed by checking whether "Join_Time" and "Leave_Time" was overlapped with other sessions within each students.
 #' Otherwise, `NA` will be returned because there is no way to be certain that students joined with a single device.

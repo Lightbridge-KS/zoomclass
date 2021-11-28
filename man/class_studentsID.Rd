@@ -50,11 +50,11 @@ A data frame (tibble) with class \code{zoom_class}. It has the following columns
 \item \strong{"Session_Count"}: Show counts of how many session that each students joined or leaved Zoom class.
 \item \strong{"Class_Start"} (POSIXct): Compute from date of "Join_Time" with time specified by \code{class_start} argument.
 \item \strong{"Class_End"} (POSIXct): Compute from date of "Leave_Time" with time specified by \code{class_end} argument.
-\item \strong{"First_Join_Time"}: First join time of each students
-\item \strong{"Last_Leave_Time"}: Last leave time of each students
-\item \strong{"Before_Class"}: Time spent before \code{class_start} of each student.
-\item \strong{"During_Class"}: Time spent during class (between \code{class_start} and \code{class_end}) of each student.
-\item \strong{"After_Class"}: Time spent after \code{class_end} of each student.
+\item \strong{"First_Join_Time"}: First join time of each student's ID
+\item \strong{"Last_Leave_Time"}: Last leave time of each student's ID
+\item \strong{"Before_Class"}: Time spent before \code{class_start} of each student's ID.
+\item \strong{"During_Class"}: Time spent during class (between \code{class_start} and \code{class_end}) of each student's ID.
+\item \strong{"After_Class"}: Time spent after \code{class_end} of each student's ID.
 \item \strong{"Total_Time"}: "Before_Class" + "During_Class" + "After_Class"
 \item \strong{"Duration_Minutes"}: Sum of "Duration (Minutes)" for each students.
 \strong{Notice:} \code{Total_Time} is likely to be less than original \code{Duration_Minutes} because the latter round the decimal down.

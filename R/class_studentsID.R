@@ -44,11 +44,11 @@
 #' * \strong{"Session_Count"}: Show counts of how many session that each students joined or leaved Zoom class.
 #' * \strong{"Class_Start"} (POSIXct): Compute from date of "Join_Time" with time specified by `class_start` argument.
 #' * \strong{"Class_End"} (POSIXct): Compute from date of "Leave_Time" with time specified by `class_end` argument.
-#' * \strong{"First_Join_Time"}: First join time of each students
-#' * \strong{"Last_Leave_Time"}: Last leave time of each students
-#' * \strong{"Before_Class"}: Time spent before `class_start` of each student.
-#' * \strong{"During_Class"}: Time spent during class (between `class_start` and `class_end`) of each student.
-#' * \strong{"After_Class"}: Time spent after `class_end` of each student.
+#' * \strong{"First_Join_Time"}: First join time of each student's ID
+#' * \strong{"Last_Leave_Time"}: Last leave time of each student's ID
+#' * \strong{"Before_Class"}: Time spent before `class_start` of each student's ID.
+#' * \strong{"During_Class"}: Time spent during class (between `class_start` and `class_end`) of each student's ID.
+#' * \strong{"After_Class"}: Time spent after `class_end` of each student's ID.
 #' * \strong{"Total_Time"}: "Before_Class" + "During_Class" + "After_Class"
 #' * \strong{"Duration_Minutes"}: Sum of "Duration (Minutes)" for each students.
 #'  **Notice:** `Total_Time` is likely to be less than original `Duration_Minutes` because the latter round the decimal down.
