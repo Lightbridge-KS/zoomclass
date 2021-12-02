@@ -95,7 +95,7 @@ then performs the followings steps:
     into `Name` and `Name_Original` columns, respectively.
 
 The output is a tibble with `zoom_participants` subclass. If metadata
-regarding Zoom meeting was found, it will be assign to a
+regarding Zoom meeting was found, it will be assigned to a
 `meeting_overview` attribute.
 
 ``` r
@@ -168,13 +168,26 @@ Now that we have read Zoom’s participants data in, It’s time to analyse
 participants in a context of a classroom. From now on, I’ll call a
 “participant” as “student”.
 
+Next, 3 **`class_*`** functions will be introduced:
+
+1.  **`class_session()`** summarizes time information about individual
+    sessions of each students (If student has multiple sessions, output
+    will show ≥ 1 rows per that student)
+2.  **`class_students()`** summarizes time information of each students
+    (1 row per student)
+3.  **`class_studentsID()`** summarizes time information of each
+    student’s ID extracted from student name (1 row per student’s ID)
+
+The first argument of these functions receives input from
+`zoom_participants` tibble as created by `read_participants()`.
+
 A typical academic classroom usually has an explicit start and end time.
 If students arrive to class later than certain cutoff time point,
 teacher can mark them as late.
 
-In the next family of functions: `class_*`, you must provide
-`class_start` and `class_end` arguments by which they will used to
-compute 4 time intervals in the corresponding columns:
+In the `class_*` functions, you must provide `class_start` and
+`class_end` arguments by which they will used to compute 4 time
+intervals that student spent before, during, and after Zoom class:
 
 -   `Before_Class`: represent time interval that student spent in Zoom
     before class started
@@ -185,37 +198,30 @@ compute 4 time intervals in the corresponding columns:
 -   `Total_Time`: the sum of time `Before_Class` + `During_Class` +
     `After_Class`
 
-All of theses time periods are Period object from `{lubridate}` package.
-(It can be converted to hours, minutes, or secound as well.)
+For `class_students()` and `class_studentsID()`, you can compute late
+time period of each student by providing `late_cutoff` argument.
+
+All of theses time intervals are Period object from `{lubridate}`
+package. (It can be converted to hours, minutes, or secound as well.)
 
 Furthermore, `class_*` functions can tell you whether each students
 joined Zoom with multiple devices at the same time period. The use case
 of this might be when live-exam is conducted in Zoom, and you want to
 check that each students joined with 1 device only (no cheating).
 
-Next, 3 **`class_*`** functions will be introduced:
-
-1.  **`class_session()`** summarizes time information about individual
-    sessions of each students (If student has multiple sessions, output
-    will show ≥ 1 rows per that student)
-2.  **`class_students()`** summarizes time information of each students
-    (1 row per student)
-3.  **`class_students()`** summarizes time information of each student’s
-    ID extracted from student name (1 row per student’s ID)
-
-The first argument of these functions are `zoom_participants` tibble as
-created by `read_participants()`.
-
 ### Class Session
 
-Suppose that our Zoom classroom was started at 10:00 and ended at 12:00
-(24 hours clock time), I will call `class_session()` as follows:
+Suppose that our Zoom classroom was started at 10:00 and ended at 12:00,
+I will call `class_session()` as follows:
+
+(Input `class_start` and `class_end` as *24-hours clock time* with no AM
+or PM)
 
 ``` r
 pp_heroes_session <- 
   class_session(pp_heroes, 
-                class_start = "10:00",
-                class_end = "12:00"
+                class_start = "10:00", # Official class started at 10:00 AM
+                class_end = "12:00" # Official class ended at 12:00 PM
                 )
 
 pp_heroes_session
@@ -238,8 +244,22 @@ pp_heroes_session
 #> #   Duration_Minutes <dbl>, Guest <chr>, Rec_Consent <chr>, Multi_Device <lgl>
 ```
 
-As previously stated, classroom-related time intervals were computed
-i.e., `Before_Class`, `During_Class`, and `After_Class`.
+As previously stated, classroom-related time intervals were computed.
+
+``` r
+pp_heroes_session %>% 
+  select(Name, ends_with("Class"), Total_Time) %>% 
+  head()
+#> # A tibble: 6 × 5
+#>   Name                Before_Class During_Class After_Class Total_Time
+#>   <chr>               <Period>     <Period>     <Period>    <Period>  
+#> 1 001_Magus           NA           1H 15M 57S   1M 59S      1H 17M 56S
+#> 2 002_She-Thing       NA           22M 59S      1M 58S      24M 57S   
+#> 3 003_Power Girl      NA           1H 51M 34S   1M 58S      1H 53M 32S
+#> 4 003_Power Girl      NA           1H 48M 29S   1M 58S      1H 50M 27S
+#> 5 004_Angel Salvadore NA           1H 44M 49S   1M 58S      1H 46M 47S
+#> 6 005_Donna Troy      NA           1H 50M 34S   1M 55S      1H 52M 29S
+```
 
 Let’s see who spend time during class all the time
 
@@ -291,9 +311,167 @@ pp_heroes_session %>%
 #> 4 022_Dazzler             2 2021-11-19 11:02:46 2021-11-19 11:29:38 NA
 ```
 
-### Class Student (TO DO)
+### Class Student
 
-### Class Student ID (TO DO)
+**`class_students()`** summarizes time information grouped by each
+students (grouping variables is `Name (Original Name)` and `Email`). The
+result will be a tibble with one row per student.
+
+Most columns are the same as output from `class_session()`, except for
+the followings:
+
+-   `Session_Count`: show session counts of each student (how many times
+    each student join and leave class)
+-   `First_Join_Time`: if student has multiple sessions, this would
+    choose only the earliest join time.
+-   `Last_Leave_Time`: if student has multiple sessions, this would
+    choose only the latest leave time.
+
+New optional argument is `late_cutoff` from which student will be
+considered late if first joined time is later than this cutoff. The late
+time period will be shown in `Late_Time` column.
+
+``` r
+pp_heroes_students <- 
+  class_students(pp_heroes, 
+               class_start = "10:00",
+               class_end = "12:00",
+               late_cutoff = "10:15" # If student joined later than 10:15 will considered late
+              )
+
+head(pp_heroes_students)
+#> # A tibble: 6 × 16
+#>   `Name (Original … Name  Name_Original Email  Session_Count Class_Start        
+#>   <chr>             <chr> <chr>         <chr>          <int> <dttm>             
+#> 1 001_Magus         001_… <NA>          magus…             1 2021-11-19 10:00:00
+#> 2 002_She-Thing     002_… <NA>          she-t…             1 2021-11-19 10:00:00
+#> 3 003_Power Girl (… 003_… Kara Zor-L    power…             2 2021-11-19 10:00:00
+#> 4 004_Angel Salvad… 004_… <NA>          angel…             1 2021-11-19 10:00:00
+#> 5 005_Donna Troy    005_… <NA>          donna…             1 2021-11-19 10:00:00
+#> 6 006_Phoenix       006_… <NA>          phoen…             1 2021-11-19 10:00:00
+#> # … with 10 more variables: Class_End <dttm>, First_Join_Time <dttm>,
+#> #   Last_Leave_Time <dttm>, Before_Class <Period>, During_Class <Period>,
+#> #   After_Class <Period>, Total_Time <Period>, Duration_Minutes <dbl>,
+#> #   Multi_Device <lgl>, Late_Time <Period>
+```
+
+Let’s see who joined class late \> 10 minutes (later than 10:25).
+
+``` r
+pp_heroes_students %>% 
+  filter(Late_Time > lubridate::minutes(10)) %>% 
+  select(Name, First_Join_Time, Late_Time)
+#> # A tibble: 5 × 3
+#>   Name               First_Join_Time     Late_Time
+#>   <chr>              <dttm>              <Period> 
+#> 1 001_Magus          2021-11-19 10:44:03 29M 3S   
+#> 2 002_She-Thing      2021-11-19 11:37:01 1H 22M 1S
+#> 3 012_Shang-Chi      2021-11-19 11:18:16 1H 3M 16S
+#> 4 021_Winter Soldier 2021-11-19 11:00:49 45M 49S  
+#> 5 022_Dazzler        2021-11-19 11:01:02 46M 2S
+```
+
+### Class Student ID
+
+Supposed that after you’ve checked class attendance of each student,
+perhaps you want to merge this data into a database by some key columns
+which is usually student’s ID.
+
+First, you informed students to put student’s ID in their names, for
+example: “001_Megus”.
+
+**`class_studentsID()`** will help you summarizes time information
+grouped by each student’s ID. Then, you can used these IDs to merge into
+a database.
+
+The internal processes are that `class_studentsID()` extracts student’s
+ID from `Name (Original Name)` column using regular expression as
+provided by `id_regex`. Then, time information will be summarized per
+student’s ID (grouping variable is `ID`), and the rest of output columns
+is similar to `class_students()`. Finally, the result will be a tibble
+with one row per `ID`.
+
+``` r
+pp_heroes_studentsID <- 
+  class_studentsID(pp_heroes, 
+                   id_regex = "\\d+", # Extract digits from student name as student's ID
+                   class_start = "10:00",
+                   class_end = "12:00",
+                   late_cutoff = "10:15" # If student joined later than 10:15 will considered late
+                   )
+#> Warning in max(Session): no non-missing arguments to max; returning -Inf
+#> Warning in min.default(structure(numeric(0), tzone = "UTC", class =
+#> c("POSIXct", : no non-missing arguments to min; returning Inf
+#> Warning in max.default(structure(numeric(0), tzone = "UTC", class =
+#> c("POSIXct", : no non-missing arguments to max; returning -Inf
+
+head(pp_heroes_studentsID)
+#> # A tibble: 6 × 15
+#>   ID    Name      Email    Session_Count Class_Start         Class_End          
+#>   <chr> <chr>     <chr>            <int> <dttm>              <dttm>             
+#> 1 001   001_Magus magus_u…             1 2021-11-19 10:00:00 2021-11-19 12:00:00
+#> 2 002   002_She-… she-thi…             1 2021-11-19 10:00:00 2021-11-19 12:00:00
+#> 3 003   003_Powe… power-g…             2 2021-11-19 10:00:00 2021-11-19 12:00:00
+#> 4 004   004_Ange… angel-s…             1 2021-11-19 10:00:00 2021-11-19 12:00:00
+#> 5 005   005_Donn… donna-t…             1 2021-11-19 10:00:00 2021-11-19 12:00:00
+#> 6 006   006_Phoe… phoenix…             1 2021-11-19 10:00:00 2021-11-19 12:00:00
+#> # … with 9 more variables: First_Join_Time <dttm>, Last_Leave_Time <dttm>,
+#> #   Before_Class <Period>, During_Class <Period>, After_Class <Period>,
+#> #   Total_Time <Period>, Duration_Minutes <dbl>, Multi_Device <lgl>,
+#> #   Late_Time <Period>
+```
+
+(If the same `ID` is founded in multiple names (e.g. “001_Magus”,
+“001_magus”), the `Name` column will contain all combinations of names
+for that particular `ID`.)
+
+### Combine Data
+
+Here, I will give an example of merging student data to a database.
+
+This package provides `heroes_students` data frame that contain names
+and ID of student who enrolled the course in this semester.
+
+``` r
+head(heroes_students)
+#> # A tibble: 6 × 3
+#>   ID    Name            Enrolled
+#>   <chr> <chr>           <lgl>   
+#> 1 001   Magus           FALSE   
+#> 2 002   She-Thing       TRUE    
+#> 3 003   Power Girl      FALSE   
+#> 4 004   Angel Salvadore TRUE    
+#> 5 005   Donna Troy      FALSE   
+#> 6 006   Phoenix         TRUE
+```
+
+You can join `heroes_students` with `pp_heroes_studentsID` using
+`dplyr::*_join` functions by `ID`.
+
+``` r
+heroes_students %>% 
+  filter(Enrolled) %>% 
+  # Merge to Zoom data by `ID`
+  full_join(pp_heroes_studentsID, by = "ID", suffix = c("_from_ID", "_from_Zoom"))
+#> # A tibble: 27 × 17
+#>    ID    Name_from_ID    Enrolled Name_from_Zoom     Email         Session_Count
+#>    <chr> <chr>           <lgl>    <chr>              <chr>                 <int>
+#>  1 002   She-Thing       TRUE     002_She-Thing      she-thing_ra…             1
+#>  2 004   Angel Salvadore TRUE     004_Angel Salvado… angel-salvad…             1
+#>  3 006   Phoenix         TRUE     006_Phoenix        phoenix_muta…             1
+#>  4 007   Birdman         TRUE     007_Birdman        birdman_eter…             1
+#>  5 008   Simon Baz       TRUE     008_Simon Baz      simon-baz_hu…             1
+#>  6 010   Cyborg Superman TRUE     010_Cyborg Superm… cyborg-super…             2
+#>  7 012   Shang-Chi       TRUE     012_Shang-Chi (Xu… shang-chi_hu…             1
+#>  8 014   Clea            TRUE     014_Clea           clea_unknown…             1
+#>  9 015   Loki            TRUE     015_Loki (Loki La… loki_asgardi…             1
+#> 10 017   Swarm           TRUE     017_Swarm          swarm_mutant…             2
+#> # … with 17 more rows, and 11 more variables: Class_Start <dttm>,
+#> #   Class_End <dttm>, First_Join_Time <dttm>, Last_Leave_Time <dttm>,
+#> #   Before_Class <Period>, During_Class <Period>, After_Class <Period>,
+#> #   Total_Time <Period>, Duration_Minutes <dbl>, Multi_Device <lgl>,
+#> #   Late_Time <Period>
+```
 
 ## Zoom Chat
 
