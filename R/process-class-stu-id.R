@@ -90,6 +90,8 @@ process_summary_ID <- function(df_extracted,
 
   id_type <- match.arg(id_type)
   period_vars <- c("Before_Class", "During_Class", "After_Class", "Total_Time")
+  # If `df_extract` has 0 rows return it
+  if(nrow(df_extracted) == 0L) return(df_extracted)
 
   # Grouped By
   df_grp <- switch (id_type,
