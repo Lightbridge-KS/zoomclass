@@ -1,0 +1,11 @@
+url: https://lightbridge-ks.github.io/zoomclass
+
+
+template:
+  bootstrap: 5
+  bootswatch: flatly
+
+navbar:
+  right:
+   - icon: fa-github
+     href: https://github.com/Lightbridge-KS/zoomclass
