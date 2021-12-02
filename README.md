@@ -399,11 +399,6 @@ pp_heroes_studentsID <-
                    class_end = "12:00",
                    late_cutoff = "10:15" # If student joined later than 10:15 will considered late
                    )
-#> Warning in max(Session): no non-missing arguments to max; returning -Inf
-#> Warning in min.default(structure(numeric(0), tzone = "UTC", class =
-#> c("POSIXct", : no non-missing arguments to min; returning Inf
-#> Warning in max.default(structure(numeric(0), tzone = "UTC", class =
-#> c("POSIXct", : no non-missing arguments to max; returning -Inf
 
 head(pp_heroes_studentsID)
 #> # A tibble: 6 × 15
