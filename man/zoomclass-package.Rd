@@ -8,6 +8,13 @@
 \description{
 This package contains a collection of functions for analysis of Zoom classroom report. This includes parsing, data wrangling and analysis of program Zoom chat file & participant recording with option to compute time interval before, during, and after class and also late time.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://lightbridge-ks.github.io/zoomclass}
+}
+
+}
 \author{
 \strong{Maintainer}: Kittipos Sirivongrungson \email{ki11ip0.s.a.s@gmail.com}
 

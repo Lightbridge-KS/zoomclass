@@ -36,7 +36,7 @@ read_participants <- function(file) {
     df <-  readr::read_csv(file = file, show_col_types = FALSE)
   } else {
     # Has Metadata at first row; skip first 3 rows
-    df <- readr::read_csv(file = file, skip = 3, col_select = 1:7,
+    df <- readr::read_csv(file = file, skip = 3, #col_select = 1:7,
                           show_col_types = FALSE)
   }
 
@@ -52,8 +52,11 @@ read_participants <- function(file) {
     dplyr::rename(
       Email = "User Email",
       Join_Time = "Join Time", Leave_Time = "Leave Time",
-      Duration_Minutes = "Duration (Minutes)", Rec_Consent = "Recording Consent"
+      Duration_Minutes = "Duration (Minutes)"
     ) %>%
+    ## Rename column if present (this technique works)
+    dplyr::rename_with(.fn = ~paste0("Rec_Consent"),
+                       .cols = tidyselect::contains("Recording Consent")) %>%
     # Date-Time Formatting: `mm/dd/yy hh:mm:ss AM/PM`
     dplyr::mutate(
       dplyr::across(
