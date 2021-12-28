@@ -34,115 +34,22 @@
     <loc>https://lightbridge-ks.github.io/zoomclass/reference/class_studentsID.html</loc>
   </url>
   <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/create_zoom_class.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/create_zoom_participants.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/extract_CurrOrig_name.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/get_after_class_time.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/get_before_class_time.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/get_during_class_time.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/get_late_time.html</loc>
-  </url>
-  <url>
     <loc>https://lightbridge-ks.github.io/zoomclass/reference/heroes_students.html</loc>
   </url>
   <url>
     <loc>https://lightbridge-ks.github.io/zoomclass/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/is_chat_full.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/is_overlap.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/is_zoom_class.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/is_zoom_participants.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/late_cutoff_POSIXct.html</loc>
-  </url>
-  <url>
     <loc>https://lightbridge-ks.github.io/zoomclass/reference/meeting_overview.html</loc>
   </url>
   <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/new_zoom_class.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/new_zoom_participants.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/parse_pp_datetime.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/parse_time_flex.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/paste_unique_collapse_na.rm.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/period_to_dbl.html</loc>
-  </url>
-  <url>
     <loc>https://lightbridge-ks.github.io/zoomclass/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/process_class_arrange.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/process_class_session_device.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/process_class_students.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/process_class_studentsID.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/process_class_time.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/process_summary_ID.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/read_meeting_overview.html</loc>
   </url>
   <url>
     <loc>https://lightbridge-ks.github.io/zoomclass/reference/read_participants.html</loc>
   </url>
   <url>
     <loc>https://lightbridge-ks.github.io/zoomclass/reference/read_zoom_chat.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/vars_period_to_dbl.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/zoom_chat_ext_contents.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/zoom_chat_ext_contents_abbr.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/zoom_chat_ext_name_abbr.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/zoom_chat_ext_name_target.html</loc>
-  </url>
-  <url>
-    <loc>https://lightbridge-ks.github.io/zoomclass/reference/zoom_chat_ext_time.html</loc>
   </url>
   <url>
     <loc>https://lightbridge-ks.github.io/zoomclass/reference/zoom_chat_extract.html</loc>
