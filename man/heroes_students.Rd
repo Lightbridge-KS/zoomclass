@@ -9,13 +9,13 @@ A data frame with 72 rows and 3 variables:
 \describe{
 \item{ID}{Student's ID}
 \item{Name}{Student's Name}
-\item{Enrolled}{Logical, If \code{TRUE} means student is enrolled, otherwise \code{FALSE}.}
+\item{Comment}{Character, Provide descriptions about students.}
 }
 }
 \usage{
 heroes_students
 }
 \description{
-A simulated dataset containing names and student's ID of heroes who enrolled in a semester.
+A simulated data set containing names and student's ID of heroes who enrolled in a semester.
 }
 \keyword{datasets}
