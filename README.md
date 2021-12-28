@@ -420,7 +420,7 @@ head(pp_heroes_studentsID)
 “001_magus”), the `Name` column will contain all combinations of names
 for that particular `ID`.)
 
-### Combine Data
+### Merge Data
 
 Here, I will give an example of merging student data to a database.
 
@@ -429,43 +429,129 @@ and ID of student who enrolled the course in this semester.
 
 ``` r
 head(heroes_students)
-#> # A tibble: 6 × 3
-#>   ID    Name            Enrolled
-#>   <chr> <chr>           <lgl>   
-#> 1 001   Magus           FALSE   
-#> 2 002   She-Thing       TRUE    
-#> 3 003   Power Girl      FALSE   
-#> 4 004   Angel Salvadore TRUE    
-#> 5 005   Donna Troy      FALSE   
-#> 6 006   Phoenix         TRUE
+#>    ID            Name Comment
+#> 1 001           Magus    <NA>
+#> 2 004 Angel Salvadore    <NA>
+#> 3 005      Donna Troy    <NA>
+#> 4 006         Phoenix    <NA>
+#> 5 008       Simon Baz    <NA>
+#> 6 009      Juggernaut    <NA>
 ```
 
 You can join `heroes_students` with `pp_heroes_studentsID` using
 `dplyr::*_join` functions by `ID`.
 
+#### Check Students NOT in Zoom Class
+
+To check whether students joined Zoom class room or not, it can be
+obtained by using a filtering join function: `dplyr::anti_join()`.
+
+These students below are in the `heroes_students` data frame, but not in
+`pp_heroes_studentsID`, which means that they didn’t join Zoom
+classroom.
+
 ``` r
 heroes_students %>% 
-  filter(Enrolled) %>% 
-  # Merge to Zoom data by `ID`
-  full_join(pp_heroes_studentsID, by = "ID", suffix = c("_from_ID", "_from_Zoom"))
-#> # A tibble: 27 × 17
-#>    ID    Name_from_ID    Enrolled Name_from_Zoom     Email         Session_Count
-#>    <chr> <chr>           <lgl>    <chr>              <chr>                 <int>
-#>  1 002   She-Thing       TRUE     002_She-Thing      she-thing_ra…             1
-#>  2 004   Angel Salvadore TRUE     004_Angel Salvado… angel-salvad…             1
-#>  3 006   Phoenix         TRUE     006_Phoenix        phoenix_muta…             1
-#>  4 007   Birdman         TRUE     007_Birdman        birdman_eter…             1
-#>  5 008   Simon Baz       TRUE     008_Simon Baz      simon-baz_hu…             1
-#>  6 010   Cyborg Superman TRUE     010_Cyborg Superm… cyborg-super…             2
-#>  7 012   Shang-Chi       TRUE     012_Shang-Chi (Xu… shang-chi_hu…             1
-#>  8 014   Clea            TRUE     014_Clea           clea_unknown…             1
-#>  9 015   Loki            TRUE     015_Loki (Loki La… loki_asgardi…             1
-#> 10 017   Swarm           TRUE     017_Swarm          swarm_mutant…             2
-#> # … with 17 more rows, and 11 more variables: Class_Start <dttm>,
-#> #   Class_End <dttm>, First_Join_Time <dttm>, Last_Leave_Time <dttm>,
+  anti_join(pp_heroes_studentsID, by = "ID")
+#>    ID         Name               Comment
+#> 1 031      Impulse                  <NA>
+#> 2 032  Marvel Girl    on a space mission
+#> 3 033      Giganta                  <NA>
+#> 4 034       Vision last seen in Westview
+#> 5 036 Silk Spectre                  <NA>
+```
+
+#### Check Non-Student in Zoom Class
+
+Likewise, You can also check participants who joined Zoom classroom but
+not in the `heroes_students` data frame (non-students). Again,
+`dplyr::anti_join()` can be used.
+
+``` r
+pp_heroes_studentsID %>% 
+  anti_join(heroes_students, by = "ID")
+#> # A tibble: 5 × 15
+#>   ID    Name      Email    Session_Count Class_Start         Class_End          
+#>   <chr> <chr>     <chr>            <int> <dttm>              <dttm>             
+#> 1 002   002_She-… she-thi…             1 2021-11-19 10:00:00 2021-11-19 12:00:00
+#> 2 003   003_Powe… power-g…             2 2021-11-19 10:00:00 2021-11-19 12:00:00
+#> 3 007   007_Bird… birdman…             1 2021-11-19 10:00:00 2021-11-19 12:00:00
+#> 4 013   013_Thun… thunder…             1 2021-11-19 10:00:00 2021-11-19 12:00:00
+#> 5 018   018_Bliz… blizzar…             1 2021-11-19 10:00:00 2021-11-19 12:00:00
+#> # … with 9 more variables: First_Join_Time <dttm>, Last_Leave_Time <dttm>,
 #> #   Before_Class <Period>, During_Class <Period>, After_Class <Period>,
 #> #   Total_Time <Period>, Duration_Minutes <dbl>, Multi_Device <lgl>,
 #> #   Late_Time <Period>
+```
+
+#### Merge All
+
+Finally, one of the best approach is to merge everything.
+`dplyr::full_join()` is a mutating join function that merge 2 data frame
+without any rows lost from either one.
+
+In this example, I fully joined 2 data frame `pp_heroes_studentsID` and
+`heroes_students` by `ID`. Suffix “\_from_ID” and “\_from_Zoom”
+represents unmatched rows from the list of students (`heroes_students`)
+and Zoom classroom, respectively.
+
+``` r
+# Merge to Zoom data by `ID`
+heroes_students_joined <- heroes_students %>% 
+  full_join(pp_heroes_studentsID, by = "ID", suffix = c("_from_ID", "_from_Zoom")) %>% 
+  relocate(ID, starts_with("Name"))
+
+head(heroes_students_joined)
+#>    ID    Name_from_ID              Name_from_Zoom Comment
+#> 1 001           Magus                   001_Magus    <NA>
+#> 2 004 Angel Salvadore         004_Angel Salvadore    <NA>
+#> 3 005      Donna Troy              005_Donna Troy    <NA>
+#> 4 006         Phoenix                 006_Phoenix    <NA>
+#> 5 008       Simon Baz               008_Simon Baz    <NA>
+#> 6 009      Juggernaut 009_Juggernaut (Cain Marko)    <NA>
+#>                                Email Session_Count         Class_Start
+#> 1           magus_unknown@marvel.com             1 2021-11-19 10:00:00
+#> 2 angel-salvadore_unknown@marvel.com             1 2021-11-19 10:00:00
+#> 3           donna-troy_amazon@dc.com             1 2021-11-19 10:00:00
+#> 4          phoenix_mutant@marvel.com             1 2021-11-19 10:00:00
+#> 5             simon-baz_human@dc.com             1 2021-11-19 10:00:00
+#> 6        juggernaut_human@marvel.com             1 2021-11-19 10:00:00
+#>             Class_End     First_Join_Time     Last_Leave_Time Before_Class
+#> 1 2021-11-19 12:00:00 2021-11-19 10:44:03 2021-11-19 12:01:59         <NA>
+#> 2 2021-11-19 12:00:00 2021-11-19 10:15:11 2021-11-19 12:01:58         <NA>
+#> 3 2021-11-19 12:00:00 2021-11-19 10:09:26 2021-11-19 12:01:55         <NA>
+#> 4 2021-11-19 12:00:00 2021-11-19 10:19:40 2021-11-19 12:01:54         <NA>
+#> 5 2021-11-19 12:00:00 2021-11-19 10:11:26 2021-11-19 12:01:59         <NA>
+#> 6 2021-11-19 12:00:00 2021-11-19 10:10:49 2021-11-19 12:01:56         <NA>
+#>   During_Class After_Class Total_Time Duration_Minutes Multi_Device Late_Time
+#> 1   1H 15M 57S      1M 59S 1H 17M 56S               78           NA    29M 3S
+#> 2   1H 44M 49S      1M 58S 1H 46M 47S              107           NA       11S
+#> 3   1H 50M 34S      1M 55S 1H 52M 29S              113           NA      <NA>
+#> 4   1H 40M 20S      1M 54S 1H 42M 14S              103           NA    4M 40S
+#> 5   1H 48M 34S      1M 59S 1H 50M 33S              111           NA      <NA>
+#> 6   1H 49M 11S      1M 56S  1H 51M 7S              112           NA      <NA>
+```
+
+Student who didn’t joined Zoom classroom will have `NA` presented in the
+`Name_from_Zoom` column, whereas participants who joined Zoom classroom
+but not in the list of students will have `NA` presented in the
+`Name_from_ID` column.
+
+``` r
+heroes_students_joined %>% 
+  filter(if_any(starts_with("Name"), is.na)) %>% 
+  select(ID, starts_with("Name"), Comment)
+#>     ID Name_from_ID              Name_from_Zoom               Comment
+#> 1  031      Impulse                        <NA>                  <NA>
+#> 2  032  Marvel Girl                        <NA>    on a space mission
+#> 3  033      Giganta                        <NA>                  <NA>
+#> 4  034       Vision                        <NA> last seen in Westview
+#> 5  036 Silk Spectre                        <NA>                  <NA>
+#> 6  002         <NA>               002_She-Thing                  <NA>
+#> 7  003         <NA> 003_Power Girl (Kara Zor-L)                  <NA>
+#> 8  007         <NA>                 007_Birdman                  <NA>
+#> 9  013         <NA>          013_Thunderbird II                  <NA>
+#> 10 018         <NA>             018_Blizzard II                  <NA>
 ```
 
 ## Zoom Chat

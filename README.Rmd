@@ -263,7 +263,7 @@ head(pp_heroes_studentsID)
 (If the same `ID` is founded in multiple names (e.g. "001_Magus", "001_magus"), the `Name` column will contain all combinations of names for that particular `ID`.)
 
 
-### Combine Data
+### Merge Data
 
 Here, I will give an example of merging student data to a database.
 
@@ -275,13 +275,53 @@ head(heroes_students)
 
 You can join `heroes_students` with `pp_heroes_studentsID` using `dplyr::*_join` functions by `ID`.
 
+
+
+#### Check Students NOT in Zoom Class
+
+To check whether students joined Zoom class room or not, it can be obtained by using a filtering join function: `dplyr::anti_join()`. 
+
+
+These students below are in the `heroes_students` data frame, but not in `pp_heroes_studentsID`, which means that they didn't join Zoom classroom.
+
 ```{r}
 heroes_students %>% 
-  filter(Enrolled) %>% 
-  # Merge to Zoom data by `ID`
-  full_join(pp_heroes_studentsID, by = "ID", suffix = c("_from_ID", "_from_Zoom"))
+  anti_join(pp_heroes_studentsID, by = "ID")
 ```
 
+#### Check Non-Student in Zoom Class
+
+Likewise, You can also check participants who joined Zoom classroom but not in the `heroes_students` data frame (non-students). Again, `dplyr::anti_join()` can be used.
+
+```{r}
+pp_heroes_studentsID %>% 
+  anti_join(heroes_students, by = "ID")
+```
+
+#### Merge All 
+
+Finally, one of the best approach is to merge everything. `dplyr::full_join()` is a mutating join function that merge 2 data frame without any rows lost from either one. 
+
+In this example, I fully joined 2 data frame `pp_heroes_studentsID` and `heroes_students` by `ID`. Suffix "_from_ID" and "_from_Zoom" represents unmatched rows from the list of students (`heroes_students`) and Zoom classroom, respectively.
+
+
+```{r heroes_students_joined}
+# Merge to Zoom data by `ID`
+heroes_students_joined <- heroes_students %>% 
+  full_join(pp_heroes_studentsID, by = "ID", suffix = c("_from_ID", "_from_Zoom")) %>% 
+  relocate(ID, starts_with("Name"))
+
+head(heroes_students_joined)
+```
+
+Student who didn't joined Zoom classroom will have `NA` presented in the `Name_from_Zoom` column, whereas participants who joined Zoom classroom but not in the list of students will have `NA` presented in the `Name_from_ID` column.
+
+
+```{r}
+heroes_students_joined %>% 
+  filter(if_any(starts_with("Name"), is.na)) %>% 
+  select(ID, starts_with("Name"), Comment)
+```
 
 
 
