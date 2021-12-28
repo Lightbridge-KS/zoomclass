@@ -9,3 +9,21 @@ navbar:
   right:
    - icon: fa-github
      href: https://github.com/Lightbridge-KS/zoomclass
+
+
+reference:
+- title: Zoom Participants Report
+  description: |
+    Funtions to analyse Zoom participants report file (`.csv`).
+  contents:
+  - '`read_participants`'
+  - '`class_session`'
+  - '`class_students`'
+  - '`class_studentsID`'
+  - '`zoomclass_example`'
+  - '`meeting_overview`'
+- title: Zoom Chat
+  description: |
+    Funtions to parse program Zoom chat file from `.txt` file to a tibble.
+  contents:
+  - '`read_zoom_chat`'
