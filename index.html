@@ -124,7 +124,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"fs"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
 
-  <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/file_show.html" class="external-link">file_show</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"zoomclass"</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_show.html" class="external-link">file_show</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"zoomclass"</span><span class="op">)</span><span class="op">)</span>
   
 <span class="op">}</span></code></pre></div>
 </div>
@@ -376,52 +376,119 @@
 <p>(If the same <code>ID</code> is founded in multiple names (e.g. “001_Magus”, “001_magus”), the <code>Name</code> column will contain all combinations of names for that particular <code>ID</code>.)</p>
 </div>
 <div class="section level3">
-<h3 id="combine-data">Combine Data<a class="anchor" aria-label="anchor" href="#combine-data"></a>
+<h3 id="merge-data">Merge Data<a class="anchor" aria-label="anchor" href="#merge-data"></a>
 </h3>
 <p>Here, I will give an example of merging student data to a database.</p>
 <p>This package provides <code>heroes_students</code> data frame that contain names and ID of student who enrolled the course in this semester.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">heroes_students</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 × 3</span>
-<span class="co">#&gt;   ID    Name            Enrolled</span>
-<span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;lgl&gt;   </span>
-<span class="co">#&gt; 1 001   Magus           FALSE   </span>
-<span class="co">#&gt; 2 002   She-Thing       TRUE    </span>
-<span class="co">#&gt; 3 003   Power Girl      FALSE   </span>
-<span class="co">#&gt; 4 004   Angel Salvadore TRUE    </span>
-<span class="co">#&gt; 5 005   Donna Troy      FALSE   </span>
-<span class="co">#&gt; 6 006   Phoenix         TRUE</span></code></pre></div>
+<span class="co">#&gt;    ID            Name Comment</span>
+<span class="co">#&gt; 1 001           Magus    &lt;NA&gt;</span>
+<span class="co">#&gt; 2 004 Angel Salvadore    &lt;NA&gt;</span>
+<span class="co">#&gt; 3 005      Donna Troy    &lt;NA&gt;</span>
+<span class="co">#&gt; 4 006         Phoenix    &lt;NA&gt;</span>
+<span class="co">#&gt; 5 008       Simon Baz    &lt;NA&gt;</span>
+<span class="co">#&gt; 6 009      Juggernaut    &lt;NA&gt;</span></code></pre></div>
 <p>You can join <code>heroes_students</code> with <code>pp_heroes_studentsID</code> using <code>dplyr::*_join</code> functions by <code>ID</code>.</p>
+<div class="section level4">
+<h4 id="check-students-not-in-zoom-class">Check Students NOT in Zoom Class<a class="anchor" aria-label="anchor" href="#check-students-not-in-zoom-class"></a>
+</h4>
+<p>To check whether students joined Zoom class room or not, it can be obtained by using a filtering join function: <code><a href="https://dplyr.tidyverse.org/reference/filter-joins.html" class="external-link">dplyr::anti_join()</a></code>.</p>
+<p>These students below are in the <code>heroes_students</code> data frame, but not in <code>pp_heroes_studentsID</code>, which means that they didn’t join Zoom classroom.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">heroes_students</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Enrolled</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
-  <span class="co"># Merge to Zoom data by `ID`</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">pp_heroes_studentsID</span>, by <span class="op">=</span> <span class="st">"ID"</span>, suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"_from_ID"</span>, <span class="st">"_from_Zoom"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 27 × 17</span>
-<span class="co">#&gt;    ID    Name_from_ID    Enrolled Name_from_Zoom     Email         Session_Count</span>
-<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;           &lt;lgl&gt;    &lt;chr&gt;              &lt;chr&gt;                 &lt;int&gt;</span>
-<span class="co">#&gt;  1 002   She-Thing       TRUE     002_She-Thing      she-thing_ra…             1</span>
-<span class="co">#&gt;  2 004   Angel Salvadore TRUE     004_Angel Salvado… angel-salvad…             1</span>
-<span class="co">#&gt;  3 006   Phoenix         TRUE     006_Phoenix        phoenix_muta…             1</span>
-<span class="co">#&gt;  4 007   Birdman         TRUE     007_Birdman        birdman_eter…             1</span>
-<span class="co">#&gt;  5 008   Simon Baz       TRUE     008_Simon Baz      simon-baz_hu…             1</span>
-<span class="co">#&gt;  6 010   Cyborg Superman TRUE     010_Cyborg Superm… cyborg-super…             2</span>
-<span class="co">#&gt;  7 012   Shang-Chi       TRUE     012_Shang-Chi (Xu… shang-chi_hu…             1</span>
-<span class="co">#&gt;  8 014   Clea            TRUE     014_Clea           clea_unknown…             1</span>
-<span class="co">#&gt;  9 015   Loki            TRUE     015_Loki (Loki La… loki_asgardi…             1</span>
-<span class="co">#&gt; 10 017   Swarm           TRUE     017_Swarm          swarm_mutant…             2</span>
-<span class="co">#&gt; # … with 17 more rows, and 11 more variables: Class_Start &lt;dttm&gt;,</span>
-<span class="co">#&gt; #   Class_End &lt;dttm&gt;, First_Join_Time &lt;dttm&gt;, Last_Leave_Time &lt;dttm&gt;,</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html" class="external-link">anti_join</a></span><span class="op">(</span><span class="va">pp_heroes_studentsID</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span>
+<span class="co">#&gt;    ID         Name               Comment</span>
+<span class="co">#&gt; 1 031      Impulse                  &lt;NA&gt;</span>
+<span class="co">#&gt; 2 032  Marvel Girl    on a space mission</span>
+<span class="co">#&gt; 3 033      Giganta                  &lt;NA&gt;</span>
+<span class="co">#&gt; 4 034       Vision last seen in Westview</span>
+<span class="co">#&gt; 5 036 Silk Spectre                  &lt;NA&gt;</span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="check-non-student-in-zoom-class">Check Non-Student in Zoom Class<a class="anchor" aria-label="anchor" href="#check-non-student-in-zoom-class"></a>
+</h4>
+<p>Likewise, You can also check participants who joined Zoom classroom but not in the <code>heroes_students</code> data frame (non-students). Again, <code><a href="https://dplyr.tidyverse.org/reference/filter-joins.html" class="external-link">dplyr::anti_join()</a></code> can be used.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pp_heroes_studentsID</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html" class="external-link">anti_join</a></span><span class="op">(</span><span class="va">heroes_students</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 5 × 15</span>
+<span class="co">#&gt;   ID    Name      Email    Session_Count Class_Start         Class_End          </span>
+<span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;            &lt;int&gt; &lt;dttm&gt;              &lt;dttm&gt;             </span>
+<span class="co">#&gt; 1 002   002_She-… she-thi…             1 2021-11-19 10:00:00 2021-11-19 12:00:00</span>
+<span class="co">#&gt; 2 003   003_Powe… power-g…             2 2021-11-19 10:00:00 2021-11-19 12:00:00</span>
+<span class="co">#&gt; 3 007   007_Bird… birdman…             1 2021-11-19 10:00:00 2021-11-19 12:00:00</span>
+<span class="co">#&gt; 4 013   013_Thun… thunder…             1 2021-11-19 10:00:00 2021-11-19 12:00:00</span>
+<span class="co">#&gt; 5 018   018_Bliz… blizzar…             1 2021-11-19 10:00:00 2021-11-19 12:00:00</span>
+<span class="co">#&gt; # … with 9 more variables: First_Join_Time &lt;dttm&gt;, Last_Leave_Time &lt;dttm&gt;,</span>
 <span class="co">#&gt; #   Before_Class &lt;Period&gt;, During_Class &lt;Period&gt;, After_Class &lt;Period&gt;,</span>
 <span class="co">#&gt; #   Total_Time &lt;Period&gt;, Duration_Minutes &lt;dbl&gt;, Multi_Device &lt;lgl&gt;,</span>
 <span class="co">#&gt; #   Late_Time &lt;Period&gt;</span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="merge-all">Merge All<a class="anchor" aria-label="anchor" href="#merge-all"></a>
+</h4>
+<p>Finally, one of the best approach is to merge everything. <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">dplyr::full_join()</a></code> is a mutating join function that merge 2 data frame without any rows lost from either one.</p>
+<p>In this example, I fully joined 2 data frame <code>pp_heroes_studentsID</code> and <code>heroes_students</code> by <code>ID</code>. Suffix “_from_ID” and “_from_Zoom” represents unmatched rows from the list of students (<code>heroes_students</code>) and Zoom classroom, respectively.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Merge to Zoom data by `ID`</span>
+<span class="va">heroes_students_joined</span> <span class="op">&lt;-</span> <span class="va">heroes_students</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">pp_heroes_studentsID</span>, by <span class="op">=</span> <span class="st">"ID"</span>, suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"_from_ID"</span>, <span class="st">"_from_Zoom"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html" class="external-link">relocate</a></span><span class="op">(</span><span class="va">ID</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"Name"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">heroes_students_joined</span><span class="op">)</span>
+<span class="co">#&gt;    ID    Name_from_ID              Name_from_Zoom Comment</span>
+<span class="co">#&gt; 1 001           Magus                   001_Magus    &lt;NA&gt;</span>
+<span class="co">#&gt; 2 004 Angel Salvadore         004_Angel Salvadore    &lt;NA&gt;</span>
+<span class="co">#&gt; 3 005      Donna Troy              005_Donna Troy    &lt;NA&gt;</span>
+<span class="co">#&gt; 4 006         Phoenix                 006_Phoenix    &lt;NA&gt;</span>
+<span class="co">#&gt; 5 008       Simon Baz               008_Simon Baz    &lt;NA&gt;</span>
+<span class="co">#&gt; 6 009      Juggernaut 009_Juggernaut (Cain Marko)    &lt;NA&gt;</span>
+<span class="co">#&gt;                                Email Session_Count         Class_Start</span>
+<span class="co">#&gt; 1           magus_unknown@marvel.com             1 2021-11-19 10:00:00</span>
+<span class="co">#&gt; 2 angel-salvadore_unknown@marvel.com             1 2021-11-19 10:00:00</span>
+<span class="co">#&gt; 3           donna-troy_amazon@dc.com             1 2021-11-19 10:00:00</span>
+<span class="co">#&gt; 4          phoenix_mutant@marvel.com             1 2021-11-19 10:00:00</span>
+<span class="co">#&gt; 5             simon-baz_human@dc.com             1 2021-11-19 10:00:00</span>
+<span class="co">#&gt; 6        juggernaut_human@marvel.com             1 2021-11-19 10:00:00</span>
+<span class="co">#&gt;             Class_End     First_Join_Time     Last_Leave_Time Before_Class</span>
+<span class="co">#&gt; 1 2021-11-19 12:00:00 2021-11-19 10:44:03 2021-11-19 12:01:59         &lt;NA&gt;</span>
+<span class="co">#&gt; 2 2021-11-19 12:00:00 2021-11-19 10:15:11 2021-11-19 12:01:58         &lt;NA&gt;</span>
+<span class="co">#&gt; 3 2021-11-19 12:00:00 2021-11-19 10:09:26 2021-11-19 12:01:55         &lt;NA&gt;</span>
+<span class="co">#&gt; 4 2021-11-19 12:00:00 2021-11-19 10:19:40 2021-11-19 12:01:54         &lt;NA&gt;</span>
+<span class="co">#&gt; 5 2021-11-19 12:00:00 2021-11-19 10:11:26 2021-11-19 12:01:59         &lt;NA&gt;</span>
+<span class="co">#&gt; 6 2021-11-19 12:00:00 2021-11-19 10:10:49 2021-11-19 12:01:56         &lt;NA&gt;</span>
+<span class="co">#&gt;   During_Class After_Class Total_Time Duration_Minutes Multi_Device Late_Time</span>
+<span class="co">#&gt; 1   1H 15M 57S      1M 59S 1H 17M 56S               78           NA    29M 3S</span>
+<span class="co">#&gt; 2   1H 44M 49S      1M 58S 1H 46M 47S              107           NA       11S</span>
+<span class="co">#&gt; 3   1H 50M 34S      1M 55S 1H 52M 29S              113           NA      &lt;NA&gt;</span>
+<span class="co">#&gt; 4   1H 40M 20S      1M 54S 1H 42M 14S              103           NA    4M 40S</span>
+<span class="co">#&gt; 5   1H 48M 34S      1M 59S 1H 50M 33S              111           NA      &lt;NA&gt;</span>
+<span class="co">#&gt; 6   1H 49M 11S      1M 56S  1H 51M 7S              112           NA      &lt;NA&gt;</span></code></pre></div>
+<p>Student who didn’t joined Zoom classroom will have <code>NA</code> presented in the <code>Name_from_Zoom</code> column, whereas participants who joined Zoom classroom but not in the list of students will have <code>NA</code> presented in the <code>Name_from_ID</code> column.</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">heroes_students_joined</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">if_any</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"Name"</span><span class="op">)</span>, <span class="va">is.na</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"Name"</span><span class="op">)</span>, <span class="va">Comment</span><span class="op">)</span>
+<span class="co">#&gt;     ID Name_from_ID              Name_from_Zoom               Comment</span>
+<span class="co">#&gt; 1  031      Impulse                        &lt;NA&gt;                  &lt;NA&gt;</span>
+<span class="co">#&gt; 2  032  Marvel Girl                        &lt;NA&gt;    on a space mission</span>
+<span class="co">#&gt; 3  033      Giganta                        &lt;NA&gt;                  &lt;NA&gt;</span>
+<span class="co">#&gt; 4  034       Vision                        &lt;NA&gt; last seen in Westview</span>
+<span class="co">#&gt; 5  036 Silk Spectre                        &lt;NA&gt;                  &lt;NA&gt;</span>
+<span class="co">#&gt; 6  002         &lt;NA&gt;               002_She-Thing                  &lt;NA&gt;</span>
+<span class="co">#&gt; 7  003         &lt;NA&gt; 003_Power Girl (Kara Zor-L)                  &lt;NA&gt;</span>
+<span class="co">#&gt; 8  007         &lt;NA&gt;                 007_Birdman                  &lt;NA&gt;</span>
+<span class="co">#&gt; 9  013         &lt;NA&gt;          013_Thunderbird II                  &lt;NA&gt;</span>
+<span class="co">#&gt; 10 018         &lt;NA&gt;             018_Blizzard II                  &lt;NA&gt;</span></code></pre></div>
+</div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="zoom-chat">Zoom Chat<a class="anchor" aria-label="anchor" href="#zoom-chat"></a>
 </h2>
 <p>The final functions of this package is design to parse program Zoom <a href="https://support.zoom.us/hc/en-us/articles/115004792763-Saving-in-meeting-chat" class="external-link">chat file</a> from <code>.txt</code> file to a tibble, just execute the followings:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/read_zoom_chat.html">read_zoom_chat</a></span><span class="op">(</span><span class="st">"path/to/zoom_chat.txt"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
