@@ -12,7 +12,7 @@
 #' @param meeting_overview attribute to add
 #'
 #' @return a "zoom_participants" object with "meeting_overview" attribute
-#'
+#' @noRd
 create_zoom_participants <- function(x, meeting_overview) {
 
   x <- new_zoom_participants(x)
@@ -27,6 +27,7 @@ create_zoom_participants <- function(x, meeting_overview) {
 #' @param x object
 #'
 #' @return a "zoom_participants" object
+#' @noRd
 new_zoom_participants <- function(x = data.frame()) {
 
   stopifnot(is.data.frame(x)) # Check DF
@@ -45,6 +46,7 @@ new_zoom_participants <- function(x = data.frame()) {
 #' @param x object
 #'
 #' @return Logical
+#' @noRd
 is_zoom_participants <- function(x){
   is(x, "zoom_participants")
 }
@@ -64,7 +66,7 @@ is_zoom_participants <- function(x){
 #' @param late_cutoff Vector included in "class_overview" attribute.
 #'
 #' @return a "zoom_class" object with "class_overview" attribute.
-#'
+#' @noRd
 create_zoom_class <- function(x,
                               class_start, class_end, late_cutoff = NA
 ) {
@@ -84,7 +86,7 @@ create_zoom_class <- function(x,
 #' @param x "zoom_participants" object
 #'
 #' @return "zoom_class" object
-#'
+#' @noRd
 new_zoom_class <- function(x) {
 
   # Check Class: must be data.frame and "zoom_participants" class
@@ -103,6 +105,7 @@ new_zoom_class <- function(x) {
 #' @param x object
 #'
 #' @return Logical
+#' @noRd
 is_zoom_class <- function(x){
   is(x, "zoom_class")
 }

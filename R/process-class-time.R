@@ -20,7 +20,7 @@
 #' * \strong{"During_Class"}: Period during class of each session
 #' * \strong{"After_Class"}: Period after class ended of each session
 #'
-#'
+#' @noRd
 process_class_time <- function(df_cleaned,
                                class_start = NULL,
                                class_end = NULL
@@ -85,6 +85,7 @@ process_class_time <- function(df_cleaned,
 #' @param chr Input can be "hh:mm:ss" or "hh:mm"
 #'
 #' @return A period object
+#' @noRd
 #'
 parse_time_flex <- function(chr) {
 
@@ -119,6 +120,7 @@ parse_time_flex <- function(chr) {
 #' @param leave (POSIXct) leave time
 #'
 #' @return Period vector
+#' @noRd
 #'
 get_before_class_time <- function(start, join, leave) {
 
@@ -157,7 +159,7 @@ get_before_class_time <- function(start, join, leave) {
 #' @param leave (POSIXct) class leave time
 #'
 #' @return Period Vector
-#'
+#' @noRd
 get_after_class_time <- function(end, join, leave) {
 
   has.Na <- is.na(end) | is.na(join) | is.na(leave)
@@ -197,7 +199,7 @@ get_after_class_time <- function(end, join, leave) {
 #' @param leave (POSIXct) Class leave time
 #'
 #' @return Period Vector
-#'
+#' @noRd
 get_during_class_time <- function(start, end, join, leave) {
 
   # Check NA

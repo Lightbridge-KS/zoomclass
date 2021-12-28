@@ -80,6 +80,7 @@ zoom_chat_extract <- function(x,
 #' @param chr Character vector to test
 #'
 #' @return Logical: `TRUE` if it was Full
+#' @noRd
 is_chat_full <- function(chr) {
 
   reg_time_from_to <- "\\d{2}:\\d{2}:\\d{2} From .+to .+"
@@ -96,7 +97,7 @@ is_chat_full <- function(chr) {
 #' @param chr A character vector
 #'
 #' @return A character vector
-#'
+#' @noRd
 zoom_chat_ext_contents <- function(chr) {
 
   chr %>%
@@ -113,7 +114,7 @@ zoom_chat_ext_contents <- function(chr) {
 #' @param chr A character vector
 #'
 #' @return A character vector
-#'
+#' @noRd
 zoom_chat_ext_contents_abbr <- function(chr) {
 
   chr %>%
@@ -132,6 +133,7 @@ zoom_chat_ext_contents_abbr <- function(chr) {
 #' @param chr A character vector
 #'
 #' @return A data.frame containing "Name" and "Target"
+#' @noRd
 zoom_chat_ext_name_target <- function(chr) {
 
   reg_from_to <- "(?<=\\d{2}:\\d{2}:\\d{2} From  ).+"
@@ -158,6 +160,7 @@ zoom_chat_ext_name_target <- function(chr) {
 #' @param chr A character vector
 #'
 #' @return A character vector of <Name>
+#' @noRd
 zoom_chat_ext_name_abbr <- function(chr) {
 
   reg_after_time <- "(?<=\\d{2}:\\d{2}:\\d{2}\t).+"
@@ -181,6 +184,7 @@ zoom_chat_ext_name_abbr <- function(chr) {
 #' @param chr A character vector
 #'
 #' @return character vector
+#' @noRd
 zoom_chat_ext_time <- function(chr) {
 
   reg_time <- "\\d{2}:\\d{2}:\\d{2}"

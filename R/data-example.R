@@ -1,6 +1,6 @@
-#' Prices of 50,000 round cut diamonds.
+#' Simulated Data of Heroes Enrolled in A Classroom
 #'
-#' A simulated data set containing names and student's ID of heroes who enrolled in a semester.
+#' A simulated data set containing names and student's ID of heroes who enrolled in a classroom.
 #'
 #' @format A data frame with 72 rows and 3 variables:
 #' \describe{

@@ -16,7 +16,7 @@
 #'
 #'
 #' @return a summary tibble
-#'
+#' @noRd
 process_class_students <- function(df_processed, late_cutoff = NULL) {
 
   period_vars <- c("Before_Class", "During_Class", "After_Class", "Total_Time")
@@ -73,7 +73,7 @@ process_class_students <- function(df_processed, late_cutoff = NULL) {
 #' @param late_cutoff (Character) Late Cutoff as "hh:mm:ss"
 #'
 #' @return `late_cutoff` as POSIXct
-#'
+#' @noRd
 late_cutoff_POSIXct <- function(join_POSIXct,
                                 late_cutoff = NULL
 ) {
@@ -100,7 +100,7 @@ late_cutoff_POSIXct <- function(join_POSIXct,
 #' @param late_cutoff (POSIXct) Cutoff time, after this time will be considered late.
 #'
 #' @return Period vector
-#'
+#' @noRd
 get_late_time <- function(join, late_cutoff) {
 
   has.Na <- is.na(join) | is.na(late_cutoff)

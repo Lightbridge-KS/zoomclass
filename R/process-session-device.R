@@ -13,7 +13,7 @@
 #' @param df_cleaned Cleaned data.frame
 #'
 #' @return A tibble with column "Session" and "Multi_Device" added.
-#'
+#' @noRd
 process_class_session_device <- function(df_cleaned){
 
   df_cleaned %>%
@@ -41,7 +41,7 @@ process_class_session_device <- function(df_cleaned){
 #' @param upr (Numeric vector) Upper bound of the interval
 #'
 #' @return Logical vector corresponding to each elements of numeric vector
-#'
+#' @noRd
 is_overlap <- function(lwr, upr){
 
   # Sort both vector by `start` in ascending order

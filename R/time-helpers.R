@@ -13,7 +13,7 @@
 #' @param round_digits significant digits to round. If `NULL`, no round.
 #'
 #' @return A data.frame with period object vars converted to numeric with specified unit.
-#'
+#' @noRd
 vars_period_to_dbl <- function(data,
                                unit = c("second", "minute", "hour"),
                                round_digits = NULL
@@ -53,7 +53,7 @@ vars_period_to_dbl <- function(data,
 #' @param round_digits significant digits to round. If `NULL`, no round.
 #'
 #' @return a double vector
-#'
+#' @noRd
 period_to_dbl <- function(x,
                           unit = c("second", "minute", "hour"),
                           round_digits = NULL

@@ -22,7 +22,7 @@
 #' @param late_cutoff (Character) Cutoff time (input as "hh:mm:ss"), participants join after this time will be considered late.
 #'
 #' @return a summary tibble
-#'
+#' @noRd
 process_class_studentsID <- function(df_processed,
                                      id_regex = ".*",
                                      collapse = "; ",
@@ -82,7 +82,7 @@ process_class_studentsID <- function(df_processed,
 #' @param collapse How to collapse "Name (Original Name)" and "Email" column
 #'
 #' @return A data frame with column: "ID" (Chr or `NA`), "Name", "Email", etc.
-#'
+#' @noRd
 process_summary_ID <- function(df_extracted,
                                id_type = c("chr", "NA"),
                                collapse = "; "
@@ -150,7 +150,7 @@ process_summary_ID <- function(df_extracted,
 #' @param collapse an optional character string to separate the results.
 #'
 #' @return A character vector
-#'
+#' @noRd
 paste_unique_collapse_na.rm <- function(x, collapse = NULL) {
 
   if(all(is.na(x))) return(NA_character_)

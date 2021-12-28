@@ -86,6 +86,7 @@ read_participants <- function(file) {
 #' @param file A path to a Zoom's participant file
 #'
 #' @return a tibble or `NULL`
+#' @noRd
 #'
 read_meeting_overview <- function(file) {
 
@@ -121,6 +122,7 @@ read_meeting_overview <- function(file) {
 #' @param chr Character vector of date-time
 #'
 #' @return A POSIXct
+#' @noRd
 #'
 parse_pp_datetime <- function(chr){
 
@@ -165,6 +167,7 @@ parse_pp_datetime <- function(chr){
 #' @param string Character vector
 #'
 #' @return A tibble with `current` and `original` column names
+#' @noRd
 #'
 extract_CurrOrig_name <- function(string) {
 

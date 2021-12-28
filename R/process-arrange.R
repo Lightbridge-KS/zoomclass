@@ -19,7 +19,7 @@
 #' * \strong{"None"}: no grouping variable
 #'
 #' @return An arranged tibble
-#'
+#' @noRd
 process_class_arrange <- function(df_cleaned,
                                   arrange_by = c("Join_Time", "Name", "None"),
                                   arrange_group = c("Name-Email", "Session", "None")

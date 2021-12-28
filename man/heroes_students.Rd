@@ -3,7 +3,7 @@
 \docType{data}
 \name{heroes_students}
 \alias{heroes_students}
-\title{Prices of 50,000 round cut diamonds.}
+\title{Simulated Data of Heroes Enrolled in A Classroom}
 \format{
 A data frame with 72 rows and 3 variables:
 \describe{
@@ -16,6 +16,6 @@ A data frame with 72 rows and 3 variables:
 heroes_students
 }
 \description{
-A simulated data set containing names and student's ID of heroes who enrolled in a semester.
+A simulated data set containing names and student's ID of heroes who enrolled in a classroom.
 }
 \keyword{datasets}
