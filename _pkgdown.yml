@@ -22,8 +22,13 @@ reference:
   - '`class_studentsID`'
   - '`zoomclass_example`'
   - '`meeting_overview`'
+  - '`class_overview`'
+  - '`heroes_students`'
+
 - title: Zoom Chat
   description: |
     Funtions to parse program Zoom chat file from `.txt` file to a tibble.
   contents:
   - '`read_zoom_chat`'
+  - '`zoom_chat_extract`'
+
