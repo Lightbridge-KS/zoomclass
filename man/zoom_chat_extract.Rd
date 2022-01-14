@@ -12,7 +12,7 @@ zoom_chat_extract(x, format_time = FALSE)
 \item{format_time}{(Logical) if \code{TRUE} column "Time" will be formatted to period object}
 }
 \value{
-A Tibble with columns "Time", "Name", "Content".
+A "zoom_chat" subclass Tibble with columns "Time", "Name", "Content".
 If full Zoom Chat format is recognized "Target" is added.
 }
 \description{
