@@ -12,7 +12,8 @@ read_zoom_chat(file, format_time = FALSE)
 \item{format_time}{(Logical) if \code{TRUE} column "Time" will be formatted to period object}
 }
 \value{
-A tibble
+A "zoom_chat" subclass Tibble with columns "Time", "Name", "Content".
+If full Zoom Chat format is recognized "Target" is added.
 }
 \description{
 Read Zoom chat from file path into a tibble.
