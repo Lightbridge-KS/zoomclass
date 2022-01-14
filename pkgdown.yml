@@ -1,9 +1,9 @@
 pandoc: 2.7.3
-pkgdown: 2.0.1
+pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   zoomclass: zoomclass.html
-last_built: 2021-12-28T09:03Z
+last_built: 2022-01-14T13:24Z
 urls:
   reference: https://lightbridge-ks.github.io/zoomclass/reference
   article: https://lightbridge-ks.github.io/zoomclass/articles
