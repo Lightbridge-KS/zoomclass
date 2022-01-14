@@ -21,6 +21,16 @@ new_zoom_chat <- function(x = data.frame()){
   x
 }
 
+#' Is object Zoom Chat
+#'
+#' @param x object to test
+#'
+#' @return
+#' @noRd
+is_zoom_chat <- function(x){
+  inherits(x, "zoom_chat")
+}
+
 # Zoom Participant --------------------------------------------------------
 
 
