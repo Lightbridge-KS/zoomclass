@@ -1,5 +1,26 @@
 
 
+
+# Zoom Chat ---------------------------------------------------------------
+
+
+#' New zoom_chat object
+#'
+#' @param x a data frame
+#'
+#' @return a data frame with class "zoom_chat" appended
+#' @noRd
+new_zoom_chat <- function(x = data.frame()){
+
+  stopifnot(is.data.frame(x)) # Check DF
+
+  if(inherits(x, "zoom_chat")) return(x) # Already inherits: return
+
+  # Assign "zoom_chat" as child
+  class(x) <- c("zoom_chat", class(x))
+  x
+}
+
 # Zoom Participant --------------------------------------------------------
 
 
