@@ -27,8 +27,9 @@ reference:
 
 - title: Zoom Chat
   description: |
-    Funtions to parse program Zoom chat file from `.txt` file to a tibble.
+    Funtions to parse program Zoom chat file from `.txt` file to a tibble, and also do some basic analysis.
   contents:
   - '`read_zoom_chat`'
   - '`zoom_chat_extract`'
+  - '`zoom_chat_count`'
 
