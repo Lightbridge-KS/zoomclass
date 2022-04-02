@@ -20,10 +20,8 @@ reference:
   - '`class_session`'
   - '`class_students`'
   - '`class_studentsID`'
-  - '`zoomclass_example`'
   - '`meeting_overview`'
   - '`class_overview`'
-  - '`heroes_students`'
 
 - title: Zoom Chat
   description: |
@@ -33,3 +31,7 @@ reference:
   - '`zoom_chat_extract`'
   - '`zoom_chat_count`'
 
+- title: Example Data
+  contents:
+  - '`heroes_students`'
+  - '`zoomclass_example`'
