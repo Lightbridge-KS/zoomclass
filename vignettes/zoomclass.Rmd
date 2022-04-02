@@ -313,8 +313,29 @@ heroes_students_joined %>%
 
 ## Zoom Chat
 
-The final functions of this package is design to parse program Zoom [chat file](https://support.zoom.us/hc/en-us/articles/115004792763-Saving-in-meeting-chat) from `.txt` file to a tibble, just execute the followings:
+The final functions of this package is design to parse program Zoom [chat file](https://support.zoom.us/hc/en-us/articles/115004792763-Saving-in-meeting-chat) from `.txt` file to a tibble.
+j
 
-```{r example, eval=FALSE}
-read_zoom_chat("path/to/zoom_chat.txt")
+```{r path}
+# Path to example Zoom Chat file
+path <- zoomclass_example("zoom-chat-1.txt")
 ```
+
+
+Raw `zoom-chat-1.txt` looks like this.
+
+```{r}
+readLines(path) %>% 
+  glue::as_glue()
+```
+
+
+Use `read_zoom_chat()` to read it into a data frame.
+
+```{r zoomchat}
+# Read from Text to a Data Frame
+read_zoom_chat(path)
+```
+
+---
+Last updated: `r Sys.Date()`
