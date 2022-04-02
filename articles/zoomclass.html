@@ -478,11 +478,11 @@
 <div class="section level3">
 <h3 id="zoom-chat">Zoom Chat<a class="anchor" aria-label="anchor" href="#zoom-chat"></a>
 </h3>
-<p>The final functions of this package is design to parse program Zoom <a href="https://support.zoom.us/hc/en-us/articles/115004792763-Saving-in-meeting-chat" class="external-link">chat file</a> from <code>.txt</code> file to a tibble. j</p>
+<p>You might want to parse <a href="https://support.zoom.us/hc/en-us/articles/115004792763-Saving-in-meeting-chat" class="external-link">Zoom chat file</a> from <code>.txt</code> file to a tibble.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Path to example Zoom Chat file</span>
 <span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/zoomclass_example.html">zoomclass_example</a></span><span class="op">(</span><span class="st">"zoom-chat-1.txt"</span><span class="op">)</span></code></pre></div>
-<p>Raw <code>zoom-chat-1.txt</code> looks like this.</p>
+<p>See that raw <code>zoom-chat-1.txt</code> looks like this.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/as_glue.html" class="external-link">as_glue</a></span><span class="op">(</span><span class="op">)</span>
