@@ -16,5 +16,5 @@ class_overview(data)
 }
 }
 \description{
-Class Overview
+Retrieve overview of class room information such as time of class started, ended, and late time cutoff.
 }

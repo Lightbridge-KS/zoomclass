@@ -16,5 +16,5 @@ meeting_overview(data)
 }
 }
 \description{
-Retrieve "meeting_overview" information such as "Meeting_ID", "Topic", etc. from "zoom_participants" object.
+Retrieve overview of meeting information such as "Meeting_ID", "Topic", etc. from "zoom_participants" object.
 }

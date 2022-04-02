@@ -6,7 +6,7 @@
 
 #' Read Zoom Chat File
 #'
-#' Read Zoom chat from file path into a tibble.
+#' Read a raw Zoom chat file from `.txt` to a tibble.
 #'
 #' @param file Path to Zoom's chat .txt file(s)
 #' @param format_time (Logical) if `TRUE` column "Time" will be formatted to period object
@@ -26,7 +26,7 @@ read_zoom_chat <- function(file,
 # Construct Tibble ---------------------------------------------------------
 
 
-#' Extract Each Element to Tibble
+#' Extract Zoom Chat Elements to Tibble
 #'
 #' Parse Zoom chat as a character vector to a tibble.
 #'

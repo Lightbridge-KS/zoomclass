@@ -1,4 +1,4 @@
-#' Get path to zoomclass example
+#' Get path to raw zoomclass example
 #'
 #' zoomclass comes bundled with a number of sample files in its `inst/extdata`
 #' directory. This function make them easy to access

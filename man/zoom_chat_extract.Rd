@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_zoom_chat.R
 \name{zoom_chat_extract}
 \alias{zoom_chat_extract}
-\title{Extract Each Element to Tibble}
+\title{Extract Zoom Chat Elements to Tibble}
 \usage{
 zoom_chat_extract(x, format_time = FALSE)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/example.R
 \name{zoomclass_example}
 \alias{zoomclass_example}
-\title{Get path to zoomclass example}
+\title{Get path to raw zoomclass example}
 \usage{
 zoomclass_example(file = NULL)
 }

@@ -30,5 +30,5 @@ A tibble with the following columns:
 }
 }
 \description{
-This function counts how many times each participants replies in the Zoom chat box and also group messages entries per participants.
+Count how many times each participants replies in the Zoom chat box and also group messages entries per participants.
 }

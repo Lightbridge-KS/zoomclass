@@ -6,7 +6,7 @@
 \alias{zoomclass-package}
 \title{zoomclass: Zoom Class}
 \description{
-This package contains a collection of functions for analysis of Zoom classroom report. This includes parsing, data wrangling and analysis of program Zoom chat file & participant recording with option to compute time interval before, during, and after class and also late time.
+Data analysis of Zoom classroom report. This includes parsing, data wrangling and analysis of program Zoom chat file & participant recording with option to compute time interval before, during, after class, and late time of students.
 }
 \seealso{
 Useful links:

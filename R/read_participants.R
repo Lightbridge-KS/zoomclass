@@ -2,7 +2,7 @@
 # Read Participant --------------------------------------------------------
 
 
-#' Read Zoom's Participant File
+#' Read & Clean Zoom's Participant File
 #'
 #' This function read Zoom's participant file from CSV to a tibble with sensible formatting and cleaner
 #' column names. `readr::read_csv` will be used to read the data. `Join Time` and `Leave Time` will be formatted as POSIXct object.

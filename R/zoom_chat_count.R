@@ -1,6 +1,6 @@
 #' Count Zoom Chat Message
 #'
-#' This function counts how many times each participants replies in the Zoom chat box and also group messages entries per participants.
+#' Count how many times each participants replies in the Zoom chat box and also group messages entries per participants.
 #'
 #' @param data a tibble with class "zoom_chat".
 #' @param collapse (Character) deliminator character to separate each entries of participants

@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_participants.R
 \name{read_participants}
 \alias{read_participants}
-\title{Read Zoom's Participant File}
+\title{Read & Clean Zoom's Participant File}
 \usage{
 read_participants(file)
 }

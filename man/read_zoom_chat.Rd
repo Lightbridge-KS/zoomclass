@@ -16,5 +16,5 @@ A "zoom_chat" subclass Tibble with columns "Time", "Name", "Content".
 If full Zoom Chat format is recognized "Target" is added.
 }
 \description{
-Read Zoom chat from file path into a tibble.
+Read a raw Zoom chat file from \code{.txt} to a tibble.
 }

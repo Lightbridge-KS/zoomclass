@@ -5,7 +5,7 @@
 
 #' Meeting Overview
 #'
-#' Retrieve "meeting_overview" information such as "Meeting_ID", "Topic", etc. from "zoom_participants" object.
+#' Retrieve overview of meeting information such as "Meeting_ID", "Topic", etc. from "zoom_participants" object.
 #'
 #' @param data "zoom_participants" object
 #'
@@ -26,6 +26,8 @@ meeting_overview <- function(data) {
 
 
 #' Class Overview
+#'
+#' Retrieve overview of class room information such as time of class started, ended, and late time cutoff.
 #'
 #' @param data "zoom_class" object
 #'
