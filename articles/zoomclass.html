@@ -104,7 +104,8 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># List all example data in `zoomclass` package</span>
 <span class="fu"><a href="../reference/zoomclass_example.html">zoomclass_example</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; [1] "participants_heroes.csv"</span>
+<span class="co">#&gt; [1] "participants_heroes_full.csv" "participants_heroes.csv"     </span>
+<span class="co">#&gt; [3] "zoom-chat-1.txt"              "zoom-chat-2.txt"</span>
 
 <span class="co"># Get a path to specific example data</span>
 <span class="va">path_heroes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/zoomclass_example.html">zoomclass_example</a></span><span class="op">(</span><span class="st">"participants_heroes.csv"</span><span class="op">)</span>
@@ -214,18 +215,18 @@
 
 <span class="va">pp_heroes_session</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 31 × 17</span></span>
-<span class="co">#&gt;    `Name (Original N… Name    Name_Original Email    Session Class_Start        </span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 001_Magus          001_Ma… <span style="color: #BB0000;">NA</span>            magus_u…       1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 002_She-Thing      002_Sh… <span style="color: #BB0000;">NA</span>            she-thi…       1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 003_Power Girl (K… 003_Po… Kara Zor-L    power-g…       1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 003_Power Girl (K… 003_Po… Kara Zor-L    power-g…       2 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 004_Angel Salvado… 004_An… <span style="color: #BB0000;">NA</span>            angel-s…       1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 005_Donna Troy     005_Do… <span style="color: #BB0000;">NA</span>            donna-t…       1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 006_Phoenix        006_Ph… <span style="color: #BB0000;">NA</span>            phoenix…       1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 007_Birdman        007_Bi… <span style="color: #BB0000;">NA</span>            birdman…       1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 008_Simon Baz      008_Si… <span style="color: #BB0000;">NA</span>            simon-b…       1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 009_Juggernaut (C… 009_Ju… Cain Marko    juggern…       1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
+<span class="co">#&gt;    `Name (Original Name)`  Name  Name_Original Email Session Class_Start        </span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 001_Magus               001_… <span style="color: #BB0000;">NA</span>            magu…       1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 002_She-Thing           002_… <span style="color: #BB0000;">NA</span>            she-…       1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 003_Power Girl (Kara Z… 003_… Kara Zor-L    powe…       1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 003_Power Girl (Kara Z… 003_… Kara Zor-L    powe…       2 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 004_Angel Salvadore     004_… <span style="color: #BB0000;">NA</span>            ange…       1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 005_Donna Troy          005_… <span style="color: #BB0000;">NA</span>            donn…       1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 006_Phoenix             006_… <span style="color: #BB0000;">NA</span>            phoe…       1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 007_Birdman             007_… <span style="color: #BB0000;">NA</span>            bird…       1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 008_Simon Baz           008_… <span style="color: #BB0000;">NA</span>            simo…       1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 009_Juggernaut (Cain M… 009_… Cain Marko    jugg…       1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 21 more rows, and 11 more variables: Class_End &lt;dttm&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   Join_Time &lt;dttm&gt;, Leave_Time &lt;dttm&gt;, Before_Class &lt;Period&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   During_Class &lt;Period&gt;, After_Class &lt;Period&gt;, Total_Time &lt;Period&gt;,</span></span>
@@ -304,14 +305,14 @@
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pp_heroes_students</span><span class="op">)</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 16</span></span>
-<span class="co">#&gt;   `Name (Original … Name  Name_Original Email  Session_Count Class_Start        </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 001_Magus         001_… <span style="color: #BB0000;">NA</span>            magus…             1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 002_She-Thing     002_… <span style="color: #BB0000;">NA</span>            she-t…             1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 003_Power Girl (… 003_… Kara Zor-L    power…             2 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 004_Angel Salvad… 004_… <span style="color: #BB0000;">NA</span>            angel…             1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 005_Donna Troy    005_… <span style="color: #BB0000;">NA</span>            donna…             1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 006_Phoenix       006_… <span style="color: #BB0000;">NA</span>            phoen…             1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
+<span class="co">#&gt;   `Name (Original …` Name  Name_Original Email Session_Count Class_Start        </span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 001_Magus          001_… <span style="color: #BB0000;">NA</span>            magu…             1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 002_She-Thing      002_… <span style="color: #BB0000;">NA</span>            she-…             1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 003_Power Girl (K… 003_… Kara Zor-L    powe…             2 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 004_Angel Salvado… 004_… <span style="color: #BB0000;">NA</span>            ange…             1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 005_Donna Troy     005_… <span style="color: #BB0000;">NA</span>            donn…             1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 006_Phoenix        006_… <span style="color: #BB0000;">NA</span>            phoe…             1 2021-11-19 <span style="color: #949494;">10:00:00</span></span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 10 more variables: Class_End &lt;dttm&gt;, First_Join_Time &lt;dttm&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   Last_Leave_Time &lt;dttm&gt;, Before_Class &lt;Period&gt;, During_Class &lt;Period&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   After_Class &lt;Period&gt;, Total_Time &lt;Period&gt;, Duration_Minutes &lt;dbl&gt;,</span></span>
@@ -348,14 +349,14 @@
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pp_heroes_studentsID</span><span class="op">)</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 15</span></span>
-<span class="co">#&gt;   ID    Name      Email    Session_Count Class_Start         Class_End          </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 001   001_Magus magus_u…             1 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 002   002_She-… she-thi…             1 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 003   003_Powe… power-g…             2 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 004   004_Ange… angel-s…             1 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 005   005_Donn… donna-t…             1 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 006   006_Phoe… phoenix…             1 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
+<span class="co">#&gt;   ID    Name         Email Session_Count Class_Start         Class_End          </span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 001   001_Magus    magu…             1 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 002   002_She-Thi… she-…             1 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 003   003_Power G… powe…             2 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 004   004_Angel S… ange…             1 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 005   005_Donna T… donn…             1 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 006   006_Phoenix  phoe…             1 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 9 more variables: First_Join_Time &lt;dttm&gt;, Last_Leave_Time &lt;dttm&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   Before_Class &lt;Period&gt;, During_Class &lt;Period&gt;, After_Class &lt;Period&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   Total_Time &lt;Period&gt;, Duration_Minutes &lt;dbl&gt;, Multi_Device &lt;lgl&gt;,</span></span>
@@ -400,13 +401,13 @@
 <code class="sourceCode R"><span class="va">pp_heroes_studentsID</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html" class="external-link">anti_join</a></span><span class="op">(</span><span class="va">heroes_students</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 15</span></span>
-<span class="co">#&gt;   ID    Name      Email    Session_Count Class_Start         Class_End          </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 002   002_She-… she-thi…             1 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 003   003_Powe… power-g…             2 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 007   007_Bird… birdman…             1 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 013   013_Thun… thunder…             1 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 018   018_Bliz… blizzar…             1 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
+<span class="co">#&gt;   ID    Name         Email Session_Count Class_Start         Class_End          </span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 002   002_She-Thi… she-…             1 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 003   003_Power G… powe…             2 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 007   007_Birdman  bird…             1 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 013   013_Thunder… thun…             1 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 018   018_Blizzar… bliz…             1 2021-11-19 <span style="color: #949494;">10:00:00</span> 2021-11-19 <span style="color: #949494;">12:00:00</span></span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 9 more variables: First_Join_Time &lt;dttm&gt;, Last_Leave_Time &lt;dttm&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   Before_Class &lt;Period&gt;, During_Class &lt;Period&gt;, After_Class &lt;Period&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   Total_Time &lt;Period&gt;, Duration_Minutes &lt;dbl&gt;, Multi_Device &lt;lgl&gt;,</span></span>
@@ -474,9 +475,39 @@
 <div class="section level3">
 <h3 id="zoom-chat">Zoom Chat<a class="anchor" aria-label="anchor" href="#zoom-chat"></a>
 </h3>
-<p>The final functions of this package is design to parse program Zoom <a href="https://support.zoom.us/hc/en-us/articles/115004792763-Saving-in-meeting-chat" class="external-link">chat file</a> from <code>.txt</code> file to a tibble, just execute the followings:</p>
+<p>The final functions of this package is design to parse program Zoom <a href="https://support.zoom.us/hc/en-us/articles/115004792763-Saving-in-meeting-chat" class="external-link">chat file</a> from <code>.txt</code> file to a tibble. j</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/read_zoom_chat.html">read_zoom_chat</a></span><span class="op">(</span><span class="st">"path/to/zoom_chat.txt"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># Path to example Zoom Chat file</span>
+<span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/zoomclass_example.html">zoomclass_example</a></span><span class="op">(</span><span class="st">"zoom-chat-1.txt"</span><span class="op">)</span></code></pre></div>
+<p>Raw <code>zoom-chat-1.txt</code> looks like this.</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/as_glue.html" class="external-link">as_glue</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; 01:07:16 Tom:    Hi everyone</span>
+<span class="co">#&gt; 01:09:00 Anny:   Hello Tom!</span>
+<span class="co">#&gt; 01:10:30 Max:    Do you have a good weekend?</span>
+<span class="co">#&gt; 01:11:10 Anny:   Yes we do.</span>
+<span class="co">#&gt; 01:11:34 Jenny:  It's great :)</span>
+<span class="co">#&gt; 01:17:15 Max:    I wish I could be there.</span>
+<span class="co">#&gt; 01:18:14 Anny:   Come and join us next time.</span>
+<span class="co">#&gt; 01:19:42 Max:    Sure, I will.</span></code></pre></div>
+<p>Use <code><a href="../reference/read_zoom_chat.html">read_zoom_chat()</a></code> to read it into a data frame.</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Read from Text to a Data Frame</span>
+<span class="fu"><a href="../reference/read_zoom_chat.html">read_zoom_chat</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 3</span></span>
+<span class="co">#&gt;   Time     Name  Content                    </span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 01:07:16 Tom   Hi everyone                </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 01:09:00 Anny  Hello Tom!                 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 01:10:30 Max   Do you have a good weekend?</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 01:11:10 Anny  Yes we do.                 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 01:11:34 Jenny It's great :)              </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 01:17:15 Max   I wish I could be there.   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 01:18:14 Anny  Come and join us next time.</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> 01:19:42 Max   Sure, I will.</span></code></pre></div>
+<hr>
+<p>Last updated: 2022-04-02</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
