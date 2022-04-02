@@ -8,7 +8,8 @@
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/Lightbridge-KS/zoomclass/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Lightbridge-KS/zoomclass/actions/workflows/R-CMD-check.yaml)
-
+[![Codecov test
+coverage](https://codecov.io/gh/Lightbridge-KS/zoomclass/branch/main/graph/badge.svg)](https://app.codecov.io/gh/Lightbridge-KS/zoomclass?branch=main)
 <!-- badges: end -->
 
 > **A high-level data analysis R package for Zoom’s participants report
