@@ -1,27 +1,22 @@
-test_that("multiplication works", {
-  expect_equal(2 * 2, 4)
-})
 
-
-# Test path to "testdata" folder ------------------------------------------
-
-
-test_that("`system.file path works`",{
-  path <- system.file("testdata", package="zoomclass")
-  expect_false(path == "")
-})
+# Read Full & Abbreviated
+chat_df_full <- zoomclass::read_zoom_chat(zoomclass_example("zoom-chat-2.txt"))
+chat_df_abbr <- zoomclass::read_zoom_chat(zoomclass_example("zoom-chat-1.txt"))
 
 
 # read_zoom_chat ----------------------------------------------------------
 
+test_that("read_zoom_chat() is working",{
 
-test_that("read_zoom_chat is working",{
-  # Full & Abbreviated
-  chat_df_full <- zoomclass::read_zoom_chat(path_testdata("chat/Zoom-chat-ex.txt"))
-  chat_df_abbr <- zoomclass::read_zoom_chat(path_testdata("chat/Zoom-chat-ex-abbr.txt"))
   expect_s3_class(chat_df_full, "zoom_chat")
   expect_s3_class(chat_df_abbr, "zoom_chat")
 
 })
 
+test_that("read_zoom_chat() column names OK",{
 
+  expect_named(chat_df_full, c("Time", "Name", "Target", "Content"))
+  expect_named(chat_df_abbr, c("Time", "Name", "Content"))
+
+
+})

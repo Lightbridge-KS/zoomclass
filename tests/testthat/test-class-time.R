@@ -1,6 +1,34 @@
 
 library(lubridate)
 
+
+# Prep Time Data ----------------------------------------------------------
+
+
+
+
+class_tm1 <- data.frame(start =  lubridate::dmy_hms("10/06/2021 10:00:00 AM"),
+                        end = lubridate::dmy_hms("10/06/2021 11:00:00 AM"),
+                        join = lubridate::dmy_hms("10/06/2021 09:00:00 AM"),
+                        leave = lubridate::dmy_hms("10/06/2021 10:30:00 AM"))
+
+class_tm2 <- data.frame(
+  start = rep("10/06/2021 10:00:00 AM", 5),
+  end = rep("10/06/2021 12:00:00 PM", 5),
+  join = paste(
+    "10/06/2021",
+    c("09:00:00", "10:30:00", "11:00:00", "08:00:00", "13:00:00"),
+    "AM"
+  ),
+  leave = paste(
+    "10/06/2021",
+    c("11:00:00", "11:00:00", "13:00:00", "09:00:00", "14:00:00"),
+    "AM"
+  )
+) %>%
+  purrr::modify(lubridate::dmy_hms)
+
+
 # Helper: parse_time_flex -------------------------------------------------
 
 test_that("parse_time_flex() works",{
@@ -15,53 +43,34 @@ test_that("parse_time_flex() works",{
 # Test: before class time -------------------------------------------------
 
 
-test_that("test-get_before_class_time",{
+test_that("test get_before_class_time() works",{
 
-  #before1 <- get_before_class_time(start = c(10, 10), join = c(9, 11), leave = c(11, 12))
   before2 <- get_before_class_time(start = class_tm1$start, join = class_tm1$join,
                                    leave = class_tm1$leave)
-  # beforeNA <- get_before_class_time(start = c(NA, 10, 10), join = c(9, 11, 9),
-  #                                   leave = c(11, 12, 9.5))
 
-  #expect_s4_class(before1, "Period")
   expect_s4_class(before2, "Period")
-
-  #expect_identical(before1, c(seconds(1), as.period(NA)))
   expect_identical(before2, hours(1))
-  #expect_identical(beforeNA, c(as.period(NA), as.period(NA), seconds(0.5)))
 
 })
 
 # Test: after class time -------------------------------------------------
 
 
-test_that("test-get_after_class_time",{
+test_that("test get_after_class_time()",{
 
-  #after1 <- get_after_class_time(end = c(12,12), join = c(10,10), leave = c(11,13))
   after2 <- get_after_class_time(end = class_tm1$end, join = class_tm1$join,
                                  leave = class_tm1$leave)
-  #afterNA <- get_after_class_time(end = c(12,12, 12), join = c(10,10, 13), leave = c(14,NA, 14))
-
-  #expect_s4_class(after1, "Period")
   expect_s4_class(after2, "Period")
 
-  #expect_identical(after1, c(as.period(NA), seconds(1)))
   expect_identical(after2, as.period(NA))
-  #expect_identical(afterNA, c(seconds(2), as.period(NA), seconds(1)))
-
 })
 
 
 # Test: during class time -------------------------------------------------
 
 
+
 test_that("test get_during_class_time()",{
-
-  skip("Must provide test data as POSIXct")
-  ## First 3 In range, last 2 Not In Range
-  class_tm2 <- data.frame(start = rep(10, 5), end = rep(12, 5),
-                          join = c(9, 10.5, 11, 8, 13), leave = c(11, 11, 13, 9, 14))
-
 
   during1 <- get_during_class_time(start = class_tm1$start, end = class_tm1$end,
                                    join = class_tm1$join, leave = class_tm1$leave)
@@ -74,9 +83,7 @@ test_that("test get_during_class_time()",{
   ## Check Value
   expect_identical(during1, minutes(30))
   expect_identical(during2,
-                   c(seconds(1), seconds(0.5), seconds(1), as.period(NA), as.period(NA))
+                   c(hours(1), minutes(30), hours(1), as.period(NA), as.period(NA))
   )
-  ## Check NA Value
-  expect_identical(get_during_class_time(NA,1,2,3), as.period(NA))
 
 })

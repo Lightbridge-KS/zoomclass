@@ -1,53 +1,63 @@
 
-
 # Read Participant --------------------------------------------------------
 
+path_pp_heroes <- zoomclass_example("participants_heroes.csv")
+path_pp_heroes_full <- zoomclass_example("participants_heroes_full.csv")
 
 
-## Still Has warning
-test_that("read_participants() still has warning",{
+pp_heroes <- zoomclass::read_participants(path_pp_heroes)
+pp_heroes_full <- zoomclass::read_participants(path_pp_heroes_full)
 
 
-  pp_cal_cleaned <- expect_warning(read_participants(paths.testdata$pp_cal),
-                                   "One or more parsing issues")
-  pp_mm2_cleaned <- expect_warning(read_participants(paths.testdata$pp_mm2),
-                                   "One or more parsing issues")
+# Check Read In -----------------------------------------------------------
+
+
+
+
+test_that("read_participants() can read data", {
+
+  expect_s3_class(read_participants(path_pp_heroes), "data.frame")
+  expect_s3_class(read_participants(path_pp_heroes_full), "data.frame")
 
 })
 
-## Check Class
-test_that("read_participants() class works", {
 
-  expect_s3_class(pp_cal_cleaned, "data.frame")
-  expect_s3_class(pp_mm2_cleaned, "data.frame")
-  expect_s3_class(pp_cal_cleaned, "zoom_participants")
-  expect_s3_class(pp_mm2_cleaned, "zoom_participants")
+# Check zoom_participants class -------------------------------------------
+
+
+test_that("read_participants() has  zoom_participants class", {
+
+  expect_s3_class(read_participants(path_pp_heroes), "zoom_participants")
+  expect_s3_class(read_participants(path_pp_heroes_full), "zoom_participants")
+
 })
 
 ## Check Attributes
-test_that("read_participants() attribute works",{
+test_that("read_participants() has meeting_overview attribute",{
 
-  attr1 <- attributes(pp_cal_cleaned)
-  attr_null <- attributes(pp_mm2_cleaned)
+  no_mtov_attr <- attributes(pp_heroes)
+  has_mtov_attr <- attributes(pp_heroes_full)
+
   nm <- c("Meeting_ID","Topic", "Start_Time",
           "End_Time", "Email", "Duration_Minute","Participants")
 
   ### Has "meeting_overview" attribute
-  expect_true("meeting_overview" %in% names(attr1))
+  expect_true("meeting_overview" %in% names(has_mtov_attr))
   ### Don't Have "meeting_overview" attribute
-  expect_false("meeting_overview" %in% names(attr_null))
+  expect_false("meeting_overview" %in% names(no_mtov_attr))
   ### Check names of "meeting_overview" attribute
-  expect_named(attr1$meeting_overview, nm)
+  expect_named(has_mtov_attr$meeting_overview, nm)
 
 })
+
 
 ## Check Values
 test_that("read_participants() values OK",{
 
   nm <- c("Name (Original Name)", "Name", "Name_Original", "Email", "Join_Time", "Leave_Time", "Duration_Minutes", "Guest", "Rec_Consent")
 
-  expect_named(pp_cal_cleaned, nm)
-  expect_named(pp_mm2_cleaned, nm)
+  expect_named(pp_heroes, nm)
+  expect_named(pp_heroes_full, nm)
 })
 
 
@@ -58,19 +68,19 @@ test_that("parse_pp_datetime() works",{
 
   # Format 1: `mm/dd/yyyy hh:mm:ss AM/PM`
   t1 <- "10/06/2021 09:20:31 AM"
-  expect_equal(parse_pp_datetime(t1), mdy_hms(t1))
+  expect_equal(parse_pp_datetime(t1), lubridate::mdy_hms(t1))
 
   # Format 2: `dd/mm/yyyy hh:mm:ss`
   t2 <- "19/11/2021 10:34:26"
-  expect_equal(parse_pp_datetime(t2), dmy_hms(t2))
+  expect_equal(parse_pp_datetime(t2), lubridate::dmy_hms(t2))
 
   # Other Format
   ## `yyyy/mm/dd hh:mm:ss`
   t3 <- "2021/10/20 09:20:31 AM"
-  expect_equal(parse_pp_datetime(t3), ymd_hms(t3))
+  expect_equal(parse_pp_datetime(t3), lubridate::ymd_hms(t3))
   ## `yyyy/dd/mm hh:mm:ss`
   t4 <- "2021/20/10 09:20:31"
-  expect_equal(parse_pp_datetime(t4), ydm_hms(t4))
+  expect_equal(parse_pp_datetime(t4), lubridate::ydm_hms(t4))
 
 })
 # Extract Current & Original Name -----------------------------------------
