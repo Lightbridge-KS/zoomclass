@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# zoomclass
+# zoomclass <a href="https://lightbridge-ks.github.io/zoomclass"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
 <!-- badges: start -->
 
@@ -82,4 +82,4 @@ read_zoom_chat(path)
 
 ------------------------------------------------------------------------
 
-Last updated: 2022-04-02
+Last updated: 2022-04-03

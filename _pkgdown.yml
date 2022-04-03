@@ -4,6 +4,8 @@ url: https://lightbridge-ks.github.io/zoomclass
 template:
   bootstrap: 5
   bootswatch: flatly
+  bslib:
+    pkgdown-nav-height: 100px
 
 navbar:
   right:
